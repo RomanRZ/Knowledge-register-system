@@ -1,0 +1,75 @@
+{
+  "managers": [
+    { "id": 1, "name": "man1", "category": "manager", "password": "man1" }
+  ],
+  "coders": [
+    {
+      "id": 1,
+      "name": "prog1",
+      "category": "coder",
+      "password": "prog1",
+      "position": "Junior Front End",
+      "experienceYears": 0.5,
+      "skills": {
+        "JS": 3,
+        "IDE": 3,
+        "bundlers": 2,
+        "HTML.CSS": 4,
+        "preprocessors": 3,
+        "HTML.CSS.libs": 5,
+        "JS.libs": 3
+      }
+    },
+    {
+      "id": 2,
+      "name": "prog2",
+      "category": "coder",
+      "password": "prog2",
+      "position": "Middle Front End",
+      "experienceYears": 2,
+      "skills": {
+        "JS": 4,
+        "IDE": 4,
+        "bundlers": 4,
+        "HTML.CSS": 3,
+        "preprocessors": 3,
+        "HTML.CSS.libs": 3,
+        "JS.libs": 4
+      }
+    },
+    {
+      "id": 3,
+      "name": "prog3",
+      "category": "coder",
+      "password": "prog3",
+      "position": "Middle Front End",
+      "experienceYears": 4,
+      "skills": {
+        "JS": 3,
+        "IDE": 4,
+        "bundlers": 4,
+        "HTML.CSS": 5,
+        "preprocessors": 5,
+        "HTML.CSS.libs": 4,
+        "JS.libs": 3
+      }
+    },
+    {
+      "id": 4,
+      "name": "prog4",
+      "category": "coder",
+      "password": "prog4",
+      "position": "Senior Front End",
+      "experienceYears": 7,
+      "skills": {
+        "JS": 5,
+        "IDE": 5,
+        "bundlers": 5,
+        "HTML.CSS": 4,
+        "preprocessors": 4,
+        "HTML.CSS.libs": 3,
+        "JS.libs": 5
+      }
+    }
+  ]
+}
