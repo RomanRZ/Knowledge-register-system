@@ -20,7 +20,7 @@ const Navigation = () => {
         <Link to='/contacts'>Contacts</Link>
       </li>
       <li>
-        <Link to='/registration'>Registration</Link>
+        <Link to='/logAndReg'>Registration</Link>
       </li>
     </ul>
   );

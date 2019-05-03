@@ -4,7 +4,7 @@ import CodersBlock from '../CodersBlock/CodersBlock';
 import Home from '../Home/Home';
 import Gallery from '../Gallery/Gallery';
 import Contacts from '../Contacts/Contacts';
-import Registration from '../Registration/Registration';
+import LogAndReg from '../LogAndReg/LogAndReg';
 import NotFound from '../NotFound/NotFound';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Context } from '../Provider/Provider';
@@ -15,7 +15,13 @@ const Main = () => {
       <h1>Main block</h1>
       <Context.Consumer>
         {value => {
-          const { managerIsLogged, coderIsLogged, addPerson } = value;
+          const {
+            state,
+            managerIsLogged,
+            coderIsLogged,
+            addPerson,
+            logIn
+          } = value;
           return (
             <Switch>
               <Route exact path='/' component={Home} />
@@ -24,7 +30,7 @@ const Main = () => {
                 path='/managers-block'
                 render={() => {
                   if (!managerIsLogged) {
-                    return <Redirect to='/registration' />;
+                    return <Redirect to='/logAndReg' />;
                   } else {
                     return <ManagersBlock />;
                   }
@@ -34,7 +40,7 @@ const Main = () => {
                 path='/coders-block'
                 render={() => {
                   if (!coderIsLogged) {
-                    return <Redirect to='/registration' />;
+                    return <Redirect to='/logAndReg' />;
                   } else {
                     return <CodersBlock />;
                   }
@@ -42,9 +48,14 @@ const Main = () => {
               />
               <Route path='/contacts' component={Contacts} />
               <Route
-                path='/registration'
+                path='/logAndReg'
                 render={props => (
-                  <Registration addPerson={addPerson} {...props} />
+                  <LogAndReg
+                    state={state}
+                    logIn={logIn}
+                    addPerson={addPerson}
+                    {...props}
+                  />
                 )}
               />
               <Route component={NotFound} />

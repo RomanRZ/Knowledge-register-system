@@ -13,6 +13,7 @@ export default class Registration extends Component {
     const { addPerson } = this.props;
     const { nameValue, passValue, category } = this.state;
     addPerson({ nameValue, passValue, category });
+    this.setState({ nameValue: '', passValue: '', category: 'managers' });
     e.preventDefault();
   };
   render() {
