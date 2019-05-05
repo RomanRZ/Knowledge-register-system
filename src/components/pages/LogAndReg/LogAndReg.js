@@ -1,6 +1,6 @@
 import React from 'react';
-import Registration from '../Registration/Registration';
-import Log from '../Log/Log';
+import Registration from './Registration/Registration';
+import Log from './Log/Log';
 
 const LogAndReg = ({ state, addPerson, logIn }) => {
   return (

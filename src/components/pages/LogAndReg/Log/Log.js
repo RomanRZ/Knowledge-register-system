@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
 
 export default class Log extends Component {
-  state = { name: '', pass: '' };
+  state = { name: '', password: '' };
   onChangeHandler = e => {
     const target = e.target;
     const name = target.name;
     this.setState({ [name]: target.value });
   };
   submitHandler = e => {
-    const {
-      state: { status, coderIsLogged, managerIsLogged },
-      logIn
-    } = this.props;
-    console.log(status);
-    console.log(coderIsLogged, managerIsLogged);
-    // logIn();
+    const { name, password } = this.state;
+    const { logIn } = this.props;
+    logIn({ name, password });
+    this.setState({ name: '', password: '' });
     e.preventDefault();
   };
   render() {
-    const { name, pass, status } = this.state;
+    const { name, password, status } = this.state;
     return (
       <div>
         <h3>login/out</h3>
@@ -30,9 +27,9 @@ export default class Log extends Component {
             onChange={this.onChangeHandler}
           />
           <input
-            name='pass'
+            name='password'
             type='password'
-            value={pass}
+            value={password}
             onChange={this.onChangeHandler}
           />
           <input type='submit' value='Log IN' />

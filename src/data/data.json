@@ -8,16 +8,19 @@
       "name": "prog1",
       "category": "coder",
       "password": "prog1",
-      "position": "Junior Front End",
+      "position": "Junior Front End Developer",
+      "competence": "junior",
       "experienceYears": 0.5,
+      "prevExperience": "Lorem ipsum dolor sit amet,   eum veritatis provident impedit, optio eveniet?",
+      "age": 22,
       "skills": {
         "JS": 3,
         "IDE": 3,
         "bundlers": 2,
-        "HTML.CSS": 4,
+        "HtmlCss": 4,
         "preprocessors": 3,
-        "HTML.CSS.libs": 5,
-        "JS.libs": 3
+        "HtmlCssLibs": 5,
+        "JSlibs": 3
       }
     },
     {
@@ -25,16 +28,19 @@
       "name": "prog2",
       "category": "coder",
       "password": "prog2",
-      "position": "Middle Front End",
+      "position": "Middle Front End Developer",
+      "competence": "middle",
       "experienceYears": 2,
+      "prevExperience": "consectetur adipisicing elit. Libero fuga sit",
+      "age": 29,
       "skills": {
         "JS": 4,
         "IDE": 4,
         "bundlers": 4,
-        "HTML.CSS": 3,
+        "HtmlCss": 3,
         "preprocessors": 3,
-        "HTML.CSS.libs": 3,
-        "JS.libs": 4
+        "HtmlCssLibs": 3,
+        "JSlibs": 4
       }
     },
     {
@@ -42,16 +48,19 @@
       "name": "prog3",
       "category": "coder",
       "password": "prog3",
-      "position": "Middle Front End",
+      "position": "Middle Front End Developer",
+      "competence": "middle",
       "experienceYears": 4,
+      "prevExperience": "perspiciatis magni placeat ab doloribus cupiditate aspernatur, molestias",
+      "age": 27,
       "skills": {
         "JS": 3,
         "IDE": 4,
         "bundlers": 4,
-        "HTML.CSS": 5,
+        "HtmlCss": 5,
         "preprocessors": 5,
-        "HTML.CSS.libs": 4,
-        "JS.libs": 3
+        "HtmlCssLibs": 4,
+        "JSlibs": 3
       }
     },
     {
@@ -59,16 +68,19 @@
       "name": "prog4",
       "category": "coder",
       "password": "prog4",
-      "position": "Senior Front End",
+      "position": "Senior Front End Developer",
+      "competence": "senior",
       "experienceYears": 7,
+      "prevExperience": ", omnis architecto eaque repellendus eligendi debitis dolores",
+      "age": 33,
       "skills": {
         "JS": 5,
         "IDE": 5,
         "bundlers": 5,
-        "HTML.CSS": 4,
+        "HtmlCss": 4,
         "preprocessors": 4,
-        "HTML.CSS.libs": 3,
-        "JS.libs": 5
+        "HtmlCssLibs": 3,
+        "JSlibs": 5
       }
     }
   ]
