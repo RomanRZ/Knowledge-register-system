@@ -1,13 +1,38 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Registration from './Registration/Registration';
-import Log from './Log/Log';
+import Auth from './Auth/Auth';
+import Input from '../../UI/Input/Input';
+import { Context } from '../../Provider/Provider';
 
-const LogAndReg = ({ state, addPerson, logIn }) => {
+const LogAndReg = () => {
   return (
-    <div>
-      <Log state={state} logIn={logIn} />
-      <Registration addPerson={addPerson} />
-    </div>
+    <Context.Consumer>
+      {({ state: { coderIsLogged, managerIsLogged }, logOut }) => {
+        let user = null;
+        if (coderIsLogged || managerIsLogged) {
+          coderIsLogged ? (user = 'Programmer') : (user = 'Manager');
+        }
+        return (
+          <div>
+            {user ? (
+              <Fragment>
+                <h3>You logged in as {user}</h3>
+                <Input
+                  inputType='button'
+                  inputValue='Log out'
+                  inputOnclick={logOut}
+                />
+              </Fragment>
+            ) : (
+              <Fragment>
+                <Auth />
+                <Registration />
+              </Fragment>
+            )}
+          </div>
+        );
+      }}
+    </Context.Consumer>
   );
 };
 

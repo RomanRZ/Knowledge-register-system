@@ -1,16 +1,21 @@
 {
   "managers": [
-    { "id": 1, "name": "man1", "category": "manager", "password": "man1" }
+    { "id": 1, "name": "man1", "category": "manager", "password": "man1" },
+    { "id": 2, "name": "man2", "category": "manager", "password": "man2" }
   ],
   "coders": [
     {
       "id": 1,
+      "fullyRegistered": true,
       "name": "prog1",
+      "sex": "male",
       "category": "coder",
       "password": "prog1",
       "position": "Junior Front End Developer",
       "competence": "junior",
-      "experienceYears": 0.5,
+      "experienceInYears": 0,
+      "experienceInMonth": 6,
+      "salary": 10,
       "prevExperience": "Lorem ipsum dolor sit amet,   eum veritatis provident impedit, optio eveniet?",
       "age": 22,
       "skills": {
@@ -25,12 +30,16 @@
     },
     {
       "id": 2,
+      "fullyRegistered": true,
       "name": "prog2",
+      "sex": "male",
       "category": "coder",
       "password": "prog2",
       "position": "Middle Front End Developer",
       "competence": "middle",
-      "experienceYears": 2,
+      "experienceInYears": 2,
+      "experienceInMonth": 6,
+      "salary": 30,
       "prevExperience": "consectetur adipisicing elit. Libero fuga sit",
       "age": 29,
       "skills": {
@@ -45,12 +54,16 @@
     },
     {
       "id": 3,
+      "fullyRegistered": true,
       "name": "prog3",
+      "sex": "female",
       "category": "coder",
       "password": "prog3",
       "position": "Middle Front End Developer",
       "competence": "middle",
-      "experienceYears": 4,
+      "experienceInYears": 4,
+      "experienceInMonth": 2,
+      "salary": 35,
       "prevExperience": "perspiciatis magni placeat ab doloribus cupiditate aspernatur, molestias",
       "age": 27,
       "skills": {
@@ -65,12 +78,16 @@
     },
     {
       "id": 4,
+      "fullyRegistered": true,
       "name": "prog4",
+      "sex": "male",
       "category": "coder",
       "password": "prog4",
       "position": "Senior Front End Developer",
       "competence": "senior",
-      "experienceYears": 7,
+      "experienceInYears": 7,
+      "experienceInMonth": 9,
+      "salary": 60,
       "prevExperience": ", omnis architecto eaque repellendus eligendi debitis dolores",
       "age": 33,
       "skills": {

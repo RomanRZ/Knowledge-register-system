@@ -14,7 +14,7 @@ const Main = () => {
     <Fragment>
       <h1>Main block</h1>
       <Context.Consumer>
-        {({ state, addPerson, logIn, requestHandler, sortBy }) => {
+        {({ state }) => {
           const { managerIsLogged, coderIsLogged } = state;
           return (
             <Switch>
@@ -22,18 +22,11 @@ const Main = () => {
               <Route path='/gallery' component={Gallery} />
               <Route
                 path='/managers-block'
-                render={props => {
+                render={() => {
                   if (!managerIsLogged) {
                     return <Redirect to='/logAndReg' />;
                   } else {
-                    return (
-                      <ManagersBlock
-                        {...props}
-                        state={state}
-                        requestHandler={requestHandler}
-                        sortBy={sortBy}
-                      />
-                    );
+                    return <ManagersBlock />;
                   }
                 }}
               />
@@ -48,17 +41,7 @@ const Main = () => {
                 }}
               />
               <Route path='/contacts' component={Contacts} />
-              <Route
-                path='/logAndReg'
-                render={props => (
-                  <LogAndReg
-                    state={state}
-                    logIn={logIn}
-                    addPerson={addPerson}
-                    {...props}
-                  />
-                )}
-              />
+              <Route path='/logAndReg' component={LogAndReg} />
               <Route component={NotFound} />
             </Switch>
           );

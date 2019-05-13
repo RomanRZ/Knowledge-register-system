@@ -1,50 +1,70 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Input from '../../../UI/Input/Input';
+import Select from '../../../UI/Select/Select';
+import { Context } from '../../../Provider/Provider';
 
-export default class Registration extends Component {
-  state = { nameValue: '', passValue: '', category: 'managers' };
-  onChangeHandler = e => {
-    const target = e.target;
-    const name = target.name;
-    this.setState({
-      [name]: target.value
-    });
-  };
-  submitHandler = e => {
-    const { addPerson } = this.props;
-    const { nameValue, passValue, category } = this.state;
-    addPerson({ nameValue, passValue, category });
-    this.setState({ nameValue: '', passValue: '', category: 'managers' });
-    e.preventDefault();
-  };
-  render() {
-    const { nameValue, passValue, category } = this.state;
-    return (
-      <form onSubmit={this.submitHandler}>
-        <h3>Registration</h3>
-        <select
-          name='category'
-          value={category}
-          onChange={this.onChangeHandler}
-        >
-          <option value='managers'>Manager</option>
-          <option value='coders'>Programmer</option>
-        </select>
-        <input
-          type='text'
-          name='nameValue'
-          value={nameValue}
-          onChange={this.onChangeHandler}
-          placeholder='Enter Name'
-        />
-        <input
-          type='password'
-          name='passValue'
-          value={passValue}
-          onChange={this.onChangeHandler}
-          placeholder='Enter password'
-        />
-        <input type='submit' value='register' />
-      </form>
-    );
-  }
-}
+const Registration = () => {
+  return (
+    <Context.Consumer>
+      {({
+        state: {
+          registration: { name, password, category },
+          validation: {
+            registration: {
+              categoryValid,
+              nameValid,
+              passwordValid,
+              formErrors
+            }
+          }
+        },
+        regSubmitHandler,
+        regChangeHandler
+      }) => {
+        return (
+          <div>
+            <form onSubmit={regSubmitHandler}>
+              <h3>Registration</h3>
+
+              <Select
+                labelName='Category'
+                selectName='category'
+                selectValue={category}
+                selectInfo={{
+                  select: '--select--',
+                  manager: 'Manager',
+                  coder: 'Programmer'
+                }}
+                selectHandler={regChangeHandler}
+              />
+              <Input
+                labelName='Name'
+                inputType='text'
+                inputName='name'
+                inputValue={name}
+                inputChangeHandler={regChangeHandler}
+                inputPlaceholder='Enter Name..'
+              />
+              <Input
+                labelName='Password'
+                inputType='password'
+                inputName='password'
+                inputValue={password}
+                inputChangeHandler={regChangeHandler}
+                inputPlaceholder='Enter Password..'
+              />
+              <Input inputType='submit' inputValue='Register' />
+            </form>
+            <div>
+              {Object.values(formErrors).map((error, index) => {
+                return <p key={index}>{error}</p>;
+              })}
+            </div>
+          </div>
+        );
+      }}
+    </Context.Consumer>
+  );
+};
+
+export default Registration;

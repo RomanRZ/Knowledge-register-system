@@ -28,7 +28,7 @@ const Navigation = () => {
               {managerIsLogged || coderIsLogged ? (
                 <div onClick={logOut}>Quit</div>
               ) : (
-                <Link to='/logAndReg'>Registration</Link>
+                <Link to='/logAndReg'>Autorization / Registration</Link>
               )}
             </li>
           </ul>
