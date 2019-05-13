@@ -1,16 +1,26 @@
 {
   "managers": [
-    { "id": 1, "name": "man1", "category": "manager", "password": "man1" },
-    { "id": 2, "name": "man2", "category": "manager", "password": "man2" }
+    {
+      "id": 1,
+      "name": "manager first",
+      "category": "manager",
+      "password": "managerfirst"
+    },
+    {
+      "id": 2,
+      "name": "manager second",
+      "category": "manager",
+      "password": "managersecond"
+    }
   ],
   "coders": [
     {
       "id": 1,
       "fullyRegistered": true,
-      "name": "prog1",
+      "name": "prorgammer first",
       "sex": "male",
       "category": "coder",
-      "password": "prog1",
+      "password": "prorgammerfirst",
       "position": "Junior Front End Developer",
       "competence": "junior",
       "experienceInYears": 0,
@@ -31,10 +41,10 @@
     {
       "id": 2,
       "fullyRegistered": true,
-      "name": "prog2",
+      "name": "prorgammer second",
       "sex": "male",
       "category": "coder",
-      "password": "prog2",
+      "password": "prorgammersecond",
       "position": "Middle Front End Developer",
       "competence": "middle",
       "experienceInYears": 2,
@@ -55,10 +65,10 @@
     {
       "id": 3,
       "fullyRegistered": true,
-      "name": "prog3",
+      "name": "prorgammer third",
       "sex": "female",
       "category": "coder",
-      "password": "prog3",
+      "password": "prorgammerthird",
       "position": "Middle Front End Developer",
       "competence": "middle",
       "experienceInYears": 4,
@@ -79,10 +89,10 @@
     {
       "id": 4,
       "fullyRegistered": true,
-      "name": "prog4",
+      "name": "prorgammer fourth",
       "sex": "male",
       "category": "coder",
-      "password": "prog4",
+      "password": "prorgammerfourth",
       "position": "Senior Front End Developer",
       "competence": "senior",
       "experienceInYears": 7,

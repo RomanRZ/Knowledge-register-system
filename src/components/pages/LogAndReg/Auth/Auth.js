@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from '../../../UI/Input/Input';
+import FormErrors from '../../../UI/FormErrors/FormErrors';
 import { Context } from '../../../Provider/Provider';
 
 const Auth = () => {
@@ -9,7 +10,11 @@ const Auth = () => {
       <Context.Consumer>
         {({
           state: {
-            auth: { name, password }
+            auth: { name, password },
+            validation: {
+              authorization: { formValid, formErrors }
+            },
+            userIsNotCreated
           },
           authSubmitHandler,
           authChangeHandler
@@ -32,7 +37,13 @@ const Auth = () => {
                 inputChangeHandler={authChangeHandler}
                 inputPlaceholder='Enter password..'
               />
-              <Input inputType='submit' inputValue='Log IN' />
+              {userIsNotCreated !== '' ? <div>{userIsNotCreated}</div> : null}
+              <FormErrors formErrors={formErrors} />
+              <Input
+                inputType='submit'
+                inputValue='Log IN'
+                inputDisabled={!formValid}
+              />
             </form>
           );
         }}

@@ -8,7 +8,8 @@ const Input = ({
   inputChecked,
   inputChangeHandler,
   inputOnclick,
-  inputPlaceholder
+  inputPlaceholder,
+  inputDisabled
 }) => {
   return (
     <label>
@@ -21,6 +22,7 @@ const Input = ({
         onChange={inputChangeHandler}
         onClick={inputOnclick}
         placeholder={inputPlaceholder}
+        disabled={inputDisabled}
       />
     </label>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from '../../../UI/Input/Input';
 import Select from '../../../UI/Select/Select';
+import FormErrors from '../../../UI/FormErrors/FormErrors';
 import { Context } from '../../../Provider/Provider';
 
 const Registration = () => {
@@ -10,12 +11,7 @@ const Registration = () => {
         state: {
           registration: { name, password, category },
           validation: {
-            registration: {
-              categoryValid,
-              nameValid,
-              passwordValid,
-              formErrors
-            }
+            registration: { formValid, formErrors }
           }
         },
         regSubmitHandler,
@@ -53,13 +49,13 @@ const Registration = () => {
                 inputChangeHandler={regChangeHandler}
                 inputPlaceholder='Enter Password..'
               />
-              <Input inputType='submit' inputValue='Register' />
+              <Input
+                inputType='submit'
+                inputValue='Register'
+                inputDisabled={!formValid}
+              />
             </form>
-            <div>
-              {Object.values(formErrors).map((error, index) => {
-                return <p key={index}>{error}</p>;
-              })}
-            </div>
+            <FormErrors formErrors={formErrors} />
           </div>
         );
       }}
