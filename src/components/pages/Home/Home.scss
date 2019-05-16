@@ -1,0 +1,45 @@
+.home {
+  width: 100%;
+  @media only screen and(min-width: 480px) {
+  }
+  &__container {
+    @media only screen and(min-width: 768px) {
+      display: flex;
+      position: relative;
+      height: 520px;
+    }
+    @media only screen and(min-width: 992px) {
+      height: 450px;
+    }
+  }
+  &__aside {
+    background: #444;
+    @media only screen and(min-width: 768px) {
+      width: 30%;
+      text-align: justify;
+      overflow: hidden;
+    }
+  }
+  &__section {
+    background: #444;
+    @media only screen and(min-width: 768px) {
+      width: 70%;
+
+      overflow: auto;
+    }
+  }
+  &__title {
+    text-align: center;
+    padding: 5px 0;
+  }
+  &__content {
+    padding: 10px;
+    text-indent: 15px;
+  }
+  &__bold {
+    font-weight: bold;
+  }
+  &__italic {
+    font-style: italic;
+  }
+}

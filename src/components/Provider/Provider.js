@@ -8,8 +8,9 @@ export default class Provider extends Component {
     registration: { name: '', password: '', category: 'select' },
     staff: null,
     authStatus: 'guest',
-    coderIsLogged: true,
-    managerIsLogged: false,
+    coderIsLogged: false,
+    managerIsLogged: true,
+    menuIsShown: false,
     codersBlock: {
       currentCodersName: '',
       currentCodersPassword: '',
@@ -43,7 +44,6 @@ export default class Provider extends Component {
       age: '',
       skill: 'JS'
     },
-
     requestedCoders: [],
     validation: {
       registration: {
@@ -65,7 +65,27 @@ export default class Provider extends Component {
           nameErrorMessage: '',
           passwordErrorMessage: ''
         }
+      },
+      searchEngine: {
+        formValid: true,
+        expYearsValid: true,
+        ageValid: true,
+        formErrors: {
+          expErrorMessage: '',
+          ageErrorMessage: ''
+        }
       }
+    }
+  };
+  // Header
+  toggleMenu = () => {
+    console.log(window.screen.width);
+    if (window.screen.width < 992) {
+      this.setState(({ menuIsShown }) => {
+        return {
+          menuIsShown: !menuIsShown
+        };
+      });
     }
   };
 
@@ -512,12 +532,81 @@ export default class Provider extends Component {
     });
     this.setState({ requestedCoders: sortedCoders });
   };
+  // Search engine validation
+  searchValidateField = (fieldName, value) => {
+    let {
+      validation,
+      validation: {
+        searchEngine,
+        searchEngine: {
+          expYearsValid,
+          ageValid,
+          formErrors,
+          formErrors: { expErrorMessage, ageErrorMessage }
+        }
+      }
+    } = this.state;
+    switch (fieldName) {
+      case 'expYears':
+        expYearsValid = value.match(/^[1-9]?[0-9]?$/) ? true : false;
+        expErrorMessage = expYearsValid
+          ? ''
+          : 'Experience error. Only 2 numbers';
+        break;
+      case 'age':
+        ageValid = value.match(/^([1-9][0-9])?$/) ? true : false;
+        ageErrorMessage = ageValid ? '' : 'Age error';
+        break;
+      default:
+        break;
+    }
+    this.setState(
+      {
+        validation: {
+          ...validation,
+          searchEngine: {
+            ...searchEngine,
+            expYearsValid: expYearsValid,
+            ageValid: ageValid,
+            formErrors: {
+              ...formErrors,
+              expErrorMessage: expErrorMessage,
+              ageErrorMessage: ageErrorMessage
+            }
+          }
+        }
+      },
+      () => {
+        const {
+          validation,
+          validation: {
+            searchEngine,
+            searchEngine: { expYearsValid, ageValid }
+          }
+        } = this.state;
+
+        this.setState({
+          validation: {
+            ...validation,
+            searchEngine: {
+              ...searchEngine,
+              formValid: expYearsValid && ageValid
+            }
+          }
+        });
+      }
+    );
+  };
+
   searchChangeHandler = e => {
-    const target = e.target;
-    const name = target.name;
-    this.setState({
-      searchEngine: { ...this.state.searchEngine, [name]: target.value }
-    });
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState(
+      {
+        searchEngine: { ...this.state.searchEngine, [name]: value }
+      },
+      () => this.searchValidateField(name, value)
+    );
   };
   searchSubmitHandler = e => {
     const { search, competence, expYears, age } = this.state.searchEngine;
@@ -661,7 +750,8 @@ export default class Provider extends Component {
           reportsChangeHandler: this.reportsChangeHandler,
           searchChangeHandler: this.searchChangeHandler,
           searchSubmitHandler: this.searchSubmitHandler,
-          searchSortSubmitHandler: this.searchSortSubmitHandler
+          searchSortSubmitHandler: this.searchSortSubmitHandler,
+          toggleMenu: this.toggleMenu
         }}
       >
         {this.props.children}

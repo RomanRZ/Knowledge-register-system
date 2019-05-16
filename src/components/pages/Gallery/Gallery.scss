@@ -1,0 +1,37 @@
+.gallery {
+  &__title {
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    overflow: hidden;
+  }
+  &__container {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  &__box {
+    width: 300px;
+    height: 300px;
+    border: 1px solid #fff;
+    overflow: hidden;
+    @media only screen and (min-width: 992px) {
+      border: 2px solid #fff;
+    }
+  }
+  &__img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: 0.5s ease-in-out;
+
+    &:hover {
+      filter: grayscale(0%);
+    }
+  }
+}

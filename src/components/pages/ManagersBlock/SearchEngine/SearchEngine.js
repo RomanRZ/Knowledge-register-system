@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from '../../../UI/Input/Input';
 import Select from '../../../UI/Select/Select';
+import FormErrors from '../../../UI/FormErrors/FormErrors';
 import { Context } from '../../../Provider/Provider';
 
 const SearchEngine = () => {
@@ -9,12 +10,16 @@ const SearchEngine = () => {
       {({
         state: {
           searchEngine: { search, competence, expYears, skill, age },
+          validation: {
+            searchEngine: { formValid, formErrors }
+          },
           requestedCoders
         },
         searchChangeHandler,
         searchSubmitHandler,
         searchSortSubmitHandler
       }) => {
+        console.log(formErrors);
         return (
           <div>
             <h3>Search Engine</h3>
@@ -54,8 +59,12 @@ const SearchEngine = () => {
                 inputChangeHandler={searchChangeHandler}
                 inputPlaceholder='Enter maximum age'
               />
-
-              <Input inputType='submit' inputValue='Find coders' />
+              <FormErrors formErrors={formErrors} />
+              <Input
+                inputType='submit'
+                inputValue='Find coders'
+                inputDisabled={!formValid}
+              />
             </form>
             {requestedCoders.length !== 0 ? (
               <form onSubmit={searchSortSubmitHandler}>

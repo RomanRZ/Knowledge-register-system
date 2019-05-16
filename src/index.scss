@@ -1,0 +1,55 @@
+$blue: #375a7f;
+$gray-dark: #303030;
+$secondary: #444;
+$purple: #6f42c1;
+$info: #3498db;
+$gray: #999;
+
+$indigo: #6610f2;
+$pink: #e83e8c;
+$red: #e74c3c;
+$orange: #fd7e14;
+$yellow: #f39c12;
+$green: #00bc8c;
+$teal: #20c997;
+$cyan: #3498db;
+$white: #fff;
+$primary: #375a7f;
+$success: #00bc8c;
+$warning: #f39c12;
+$danger: #e74c3c;
+$dark: #adb5bd;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow: auto;
+  height: 100%;
+  background: #303030;
+  color: #fff;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+  @media only screen and(min-width: 480px) {
+    font-size: 18px;
+  }
+  @media only screen and(min-width: 992px) {
+    font-size: 20px;
+  }
+  @media only screen and (min-width: 1200px) {
+    font-size: 22px;
+  }
+}

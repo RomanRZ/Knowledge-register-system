@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ManagersBlock from '../../pages/ManagersBlock/ManagersBlock';
 import CodersBlock from '../../pages/CodersBlock/CodersBlock';
 import Home from '../../pages/Home/Home';
@@ -8,11 +8,11 @@ import LogAndReg from '../../pages/LogAndReg/LogAndReg';
 import NotFound from '../../pages/NotFound/NotFound';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Context } from '../../Provider/Provider';
+import './Main.scss';
 
 const Main = () => {
   return (
-    <Fragment>
-      <h1>Main block</h1>
+    <main className='main'>
       <Context.Consumer>
         {({ state }) => {
           const { managerIsLogged, coderIsLogged } = state;
@@ -47,7 +47,7 @@ const Main = () => {
           );
         }}
       </Context.Consumer>
-    </Fragment>
+    </main>
   );
 };
 

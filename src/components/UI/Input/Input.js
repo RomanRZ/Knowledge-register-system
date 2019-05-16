@@ -2,6 +2,8 @@ import React from 'react';
 
 const Input = ({
   labelName,
+  labelClassName,
+  inputClassName,
   inputType,
   inputName,
   inputValue,
@@ -12,10 +14,11 @@ const Input = ({
   inputDisabled
 }) => {
   return (
-    <label>
+    <label className={labelClassName}>
       {labelName}
       <input
         type={inputType}
+        className={inputClassName}
         name={inputName}
         value={inputValue}
         checked={inputChecked}

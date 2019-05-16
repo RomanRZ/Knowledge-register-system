@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import Navigation from '../template/Navigation/Navigation';
 import Header from '../template/Header/Header';
 import Main from '../template/Main/Main';
 import Footer from '../template/Footer/Footer';
+import './App.scss';
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      <Main />
+    <Fragment>
+      <Navigation />
+      <div className='container'>
+        <Header />
+        <Main />
+      </div>
       <Footer />
-    </div>
+    </Fragment>
   );
 };
 

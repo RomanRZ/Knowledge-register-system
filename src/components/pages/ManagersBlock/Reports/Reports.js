@@ -5,6 +5,7 @@ import Sex from './Sex/Sex';
 import Age from './Age/Age';
 import Salary from './Salary/Salary';
 import { Context } from '../../../Provider/Provider';
+import './Reports.scss';
 
 const Reports = () => {
   return (
@@ -18,11 +19,13 @@ const Reports = () => {
         reportsChangeHandler
       }) => {
         return (
-          <div>
-            <h3>Reports</h3>
-            <form onSubmit={reportsSubmitHandler}>
+          <div className='reports'>
+            <h3 className='reports__title'>Reports</h3>
+            <form className='reports__form' onSubmit={reportsSubmitHandler}>
               <Input
                 labelName='Number of people'
+                labelClassName='reports__label'
+                inputClassName='reports__checkbox'
                 inputType='checkbox'
                 inputName='numberOfPeople'
                 inputChecked={numberOfPeople}
@@ -30,6 +33,8 @@ const Reports = () => {
               />
               <Input
                 labelName='Sex'
+                labelClassName='reports__label'
+                inputClassName='reports__checkbox'
                 inputType='checkbox'
                 inputName='sex'
                 inputChecked={sex}
@@ -37,6 +42,8 @@ const Reports = () => {
               />
               <Input
                 labelName='Age report'
+                labelClassName='reports__label'
+                inputClassName='reports__checkbox'
                 inputType='checkbox'
                 inputName='age'
                 inputChecked={age}
@@ -44,6 +51,8 @@ const Reports = () => {
               />
               <Input
                 labelName='Salary'
+                labelClassName='reports__label'
+                inputClassName='reports__checkbox'
                 inputType='checkbox'
                 inputName='salary'
                 inputChecked={salary}

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Logo = () => {
-  return <div>Logo</div>;
+  return <h2>KRS</h2>;
 };
 
 export default Logo;

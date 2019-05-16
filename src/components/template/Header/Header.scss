@@ -1,0 +1,19 @@
+.header {
+  width: 100%;
+  padding: 100px 0 20px 0;
+  background: #303030;
+  @media only screen and (min-width: 992px) {
+    padding-top: 140px;
+  }
+
+  &__title {
+    text-align: center;
+    padding: 5px;
+    line-height: 1;
+  }
+  &__nav-block {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+  }
+}

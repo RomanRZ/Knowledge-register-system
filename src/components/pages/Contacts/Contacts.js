@@ -1,8 +1,10 @@
 import React from 'react';
+import Maps from './Maps/Maps';
+import './Contacts.scss';
 
 const Contacts = () => {
   return (
-    <div>
+    <div className='contacts'>
       <h3>Contacts</h3>
       <ul>
         <li>1</li>
@@ -11,6 +13,7 @@ const Contacts = () => {
         <li>23423</li>
         <li>234234</li>
       </ul>
+      <Maps />
     </div>
   );
 };
