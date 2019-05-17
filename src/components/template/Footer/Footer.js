@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className='footer'>
       <h1 className='footer__title'>Footer</h1>
       <p className='footer__text'>
-        Knowledge register system. Made by Rabchenuik Roman © 2019
+        Knowledge register system. Made by Rabcheniuk Roman © 2019
       </p>
     </footer>
   );

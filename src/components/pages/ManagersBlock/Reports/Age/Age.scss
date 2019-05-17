@@ -1,0 +1,19 @@
+.age {
+  padding: 5px;
+  border: 1px solid #fff;
+  text-align: center;
+  width: 100%;
+  background: #444;
+
+  @media only screen and (min-width: 992px) {
+    width: 30%;
+  }
+
+  &__title {
+    text-align: center;
+    padding: 5px 0;
+  }
+  &__subtitle {
+    padding: 5px 0;
+  }
+}

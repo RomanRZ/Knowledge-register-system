@@ -6,6 +6,7 @@
   &__form {
     display: flex;
     justify-content: space-around;
+    padding: 10px 0;
   }
   &__checkbox {
     display: none;
@@ -19,6 +20,22 @@
 
     &:hover {
       background: #6f42c1;
+    }
+
+    @media only screen and (min-width: 768px) {
+      padding: 10px;
+    }
+    @media only screen and (min-width: 1200px) {
+      padding: 15px;
+    }
+
+    &--checked {
+      background: #3498db;
+    }
+  }
+  &__result {
+    @media only screen and (min-width: 992px) {
+      display: flex;
     }
   }
 }

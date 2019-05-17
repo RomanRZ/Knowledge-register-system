@@ -3,6 +3,7 @@ import Registration from './Registration/Registration';
 import Auth from './Auth/Auth';
 import Input from '../../UI/Input/Input';
 import { Context } from '../../Provider/Provider';
+import './LogAndReg.scss';
 
 const LogAndReg = () => {
   return (
@@ -13,11 +14,14 @@ const LogAndReg = () => {
           coderIsLogged ? (user = 'Programmer') : (user = 'Manager');
         }
         return (
-          <div>
+          <div className='log-reg'>
             {user ? (
               <Fragment>
-                <h3>You logged in as {user}</h3>
+                <h3 className='log-reg__curent-user'>
+                  You logged in as {user}
+                </h3>
                 <Input
+                  inputClassName='log-reg__button'
                   inputType='button'
                   inputValue='Log out'
                   inputOnclick={logOut}

@@ -1,4 +1,5 @@
 import React from 'react';
+import './Age.scss';
 
 const Age = props => {
   const { coders } = props.state.staff;
@@ -44,19 +45,23 @@ const Age = props => {
   const maxSen = Math.max(...senAges);
 
   return (
-    <div>
-      <h3>Age report</h3>
-      <p>
-        Min age: {min}, Average age: {average}, Max age: {max}
+    <div className='age'>
+      <h3 className='age__title'>Age report</h3>
+      <h4 className='age__subtitle'>IN GENERAL:</h4>
+      <p className='age__content'>
+        Minimal age: {min}, Average age: {average}, Maximum age: {max}
       </p>
-      <p>
-        Jun min age: {minJun}, jun aver age: {averageJun}, jun max age: {maxJun}
+      <h4 className='age__subtitle'>Juniors:</h4>
+      <p className='age__content'>
+        Minimal age: {minJun}, Average age: {averageJun}, Maximum age: {maxJun}
       </p>
-      <p>
-        mid min age: {minMid}, mid aver age: {averageMid}, mid max age: {maxMid}
+      <h4 className='age__subtitle'>Middles:</h4>
+      <p className='age__content'>
+        Minimal age: {minMid}, Average age: {averageMid}, Maximum age: {maxMid}
       </p>
-      <p>
-        sen min age: {minSen}, sen aver age: {averageSen}, sen max age: {maxSen}
+      <h4 className='age__subtitle'>Seniors:</h4>
+      <p className='age__content'>
+        Minimal age: {minSen}, Average age: {averageSen}, Maximum age: {maxSen}
       </p>
     </div>
   );

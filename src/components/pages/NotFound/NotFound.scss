@@ -1,11 +1,10 @@
-.contacts {
+.not-found {
   text-align: center;
+  padding: 2%;
   &__title {
     text-align: center;
-    padding: 10px 0;
   }
-  &__subtitle {
+  &__content {
     text-align: center;
-    padding: 10px 0;
   }
 }

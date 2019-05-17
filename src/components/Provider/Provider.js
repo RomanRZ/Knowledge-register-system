@@ -5,6 +5,7 @@ export default class Provider extends Component {
   state = {
     auth: { name: '', password: '' },
     userIsNotCreated: '',
+    alreadyRegistered: '',
     registration: { name: '', password: '', category: 'select' },
     staff: null,
     authStatus: 'guest',
@@ -74,19 +75,57 @@ export default class Provider extends Component {
           expErrorMessage: '',
           ageErrorMessage: ''
         }
+      },
+      codersBlock: {
+        formValid: false,
+        sexValid: false,
+        positionValid: false,
+        expYearsValid: false,
+        expMonthsValid: false,
+        salaryValid: false,
+        ageValid: false,
+        skills: {
+          jsValid: false,
+          ideValid: false,
+          bundlersValid: false,
+          htmlCssValid: false,
+          preprocessorsValid: false,
+          htmlCssLibsValid: false,
+          jsLibsValid: false
+        },
+        formErrors: {
+          sexError: '',
+          positionError: '',
+          expYearsError: '',
+          expMonthsError: '',
+          salaryError: '',
+          ageError: '',
+          jsError: '',
+          ideError: '',
+          bundlersError: '',
+          htmlCssError: '',
+          preprocessorsError: '',
+          htmlCssLibsError: '',
+          jsLibsError: ''
+        }
       }
     }
   };
   // Header
   toggleMenu = () => {
-    console.log(window.screen.width);
-    if (window.screen.width < 992) {
-      this.setState(({ menuIsShown }) => {
-        return {
-          menuIsShown: !menuIsShown
-        };
-      });
-    }
+    // console.log(window.screen.width);
+    // if (window.screen.width < 992) {
+    //   this.setState(({ menuIsShown }) => {
+    //     return {
+    //       menuIsShown: !menuIsShown
+    //     };
+    //   });
+    // }
+    this.setState(({ menuIsShown }) => {
+      return {
+        menuIsShown: !menuIsShown
+      };
+    });
   };
 
   // Authorization
@@ -396,7 +435,9 @@ export default class Provider extends Component {
         }, [])
         .includes(newPerson.name);
       if (alreadyRegistered) {
-        console.log(newPerson.name, 'already registered');
+        this.setState({
+          alreadyRegistered: `${newPerson.name} has already been registered`
+        });
         return;
       }
       this.setState(
@@ -405,6 +446,7 @@ export default class Provider extends Component {
         },
         () => {
           this.setState({
+            alreadyRegistered: '',
             registration: {
               name: '',
               password: '',
@@ -431,7 +473,9 @@ export default class Provider extends Component {
         }, [])
         .includes(newPerson.name);
       if (alreadyRegistered) {
-        console.log(newPerson.name, 'already registered');
+        this.setState({
+          alreadyRegistered: `${newPerson.name} has already been registered`
+        });
         return;
       }
       this.setState(
@@ -440,6 +484,7 @@ export default class Provider extends Component {
         },
         () => {
           this.setState({
+            alreadyRegistered: '',
             registration: {
               name: '',
               password: '',
@@ -621,10 +666,12 @@ export default class Provider extends Component {
 
   //  FOR coders block
   codersChangeHandler = e => {
-    const target = e.target;
-    const name = target.name;
+    const name = e.target.name;
+    const value = e.target.value;
     const { codersBlock } = this.state;
-    this.setState({ codersBlock: { ...codersBlock, [name]: target.value } });
+    this.setState({ codersBlock: { ...codersBlock, [name]: value } }, () =>
+      this.coderValidateField(name, value)
+    );
 
     // Changing selects of skills
     if (
@@ -639,12 +686,166 @@ export default class Provider extends Component {
       this.setState({
         codersBlock: {
           ...codersBlock,
-          skills: { ...codersBlock.skills, [name]: target.value }
+          skills: { ...codersBlock.skills, [name]: value }
         }
       });
     }
   };
   // When coder is registered but has empty profile
+  // Validation Adding coder
+  coderValidateField = (fieldName, value) => {
+    let {
+      validation,
+      validation: {
+        codersBlock,
+        codersBlock: {
+          sexValid,
+          positionValid,
+          expYearsValid,
+          expMonthsValid,
+          salaryValid,
+          ageValid,
+          skills,
+          skills: {
+            jsValid,
+            ideValid,
+            bundlersValid,
+            htmlCssValid,
+            preprocessorsValid,
+            htmlCssLibsValid,
+            jsLibsValid
+          },
+          formErrors,
+          formErrors: {
+            sexError,
+            positionError,
+            expYearsError,
+            expMonthsError,
+            salaryError,
+            ageError,
+            jsError,
+            ideError,
+            bundlersError,
+            htmlCssError,
+            preprocessorsError,
+            htmlCssLibsError,
+            jsLibsError
+          }
+        }
+      }
+    } = this.state;
+    switch (fieldName) {
+      case 'sex':
+        sexValid = value !== 'select';
+        sexError = sexValid ? '' : 'Sex field error. Please, choose sex';
+        break;
+      case 'position':
+        positionValid = value !== 'select';
+        positionError = positionValid
+          ? ''
+          : 'Position field error. Please, choose position';
+        break;
+      case 'experienceYears':
+        expYearsValid = value.match(/^[1-9]?[0-9]?$/) ? true : false;
+        expYearsError = expYearsValid
+          ? ''
+          : 'Experience in years field error. Only 2 numbers';
+        break;
+      case 'experienceMonths':
+        expMonthsValid = value !== 'select';
+        expMonthsError = expMonthsValid
+          ? ''
+          : 'Experiense in months field error. Please, choose Experiense in months';
+        break;
+      case 'salary':
+        salaryValid = value.match(/^\d+?$/) ? true : false;
+        salaryError = salaryValid ? '' : 'Salary error. Only numbers';
+        break;
+      case 'age':
+        ageValid = value.match(/^([1-9][0-9])?$/) ? true : false;
+        ageError = ageValid ? '' : 'Age error. Only 2 numbers';
+        break;
+      default:
+        break;
+    }
+
+    this.setState(
+      {
+        validation: {
+          ...validation,
+          codersBlock: {
+            ...codersBlock,
+            sexValid: sexValid,
+            positionValid: positionValid,
+            expYearsValid: expYearsValid,
+            expMonthsValid: expMonthsValid,
+            salaryValid: salaryValid,
+            ageValid: ageValid,
+            skills: {
+              ...skills,
+              jsValid: jsValid,
+              ideValid: ideValid,
+              bundlersValid: bundlersValid,
+              htmlCssValid: htmlCssValid,
+              preprocessorsValid: preprocessorsValid,
+              htmlCssLibsValid: htmlCssLibsValid,
+              jsLibsValid: jsLibsValid
+            },
+
+            formErrors: {
+              ...formErrors,
+              sexError: sexError,
+              positionError: positionError,
+              expYearsError: expYearsError,
+              expMonthsError: expMonthsError,
+              salaryError: salaryError,
+              ageError: ageError,
+              jsError: jsError,
+              ideError: ideError,
+              bundlersError: bundlersError,
+              htmlCssError: htmlCssError,
+              preprocessorsError: preprocessorsError,
+              htmlCssLibsError: htmlCssLibsError,
+              jsLibsError: jsLibsError
+            }
+          }
+        }
+      },
+      () => this.coderValidateForm()
+    );
+  };
+
+  coderValidateForm = () => {
+    const {
+      validation,
+      validation: {
+        codersBlock,
+        codersBlock: {
+          sexValid,
+          positionValid,
+          expYearsValid,
+          expMonthsValid,
+          salaryValid,
+          ageValid
+        }
+      }
+    } = this.state;
+    this.setState({
+      validation: {
+        ...validation,
+        codersBlock: {
+          ...codersBlock,
+          formValid:
+            sexValid &&
+            positionValid &&
+            expYearsValid &&
+            expMonthsValid &&
+            salaryValid &&
+            ageValid
+        }
+      }
+    });
+  };
   addCoderIntoDataBase = e => {
     const {
       staff,
@@ -740,7 +941,7 @@ export default class Provider extends Component {
         value={{
           state: this.state,
           logOut: this.logOut,
-          changeHandler: this.codersChangeHandler,
+          codersChangeHandler: this.codersChangeHandler,
           addCoderIntoDataBase: this.addCoderIntoDataBase,
           authChangeHandler: this.authChangeHandler,
           authSubmitHandler: this.authSubmitHandler,

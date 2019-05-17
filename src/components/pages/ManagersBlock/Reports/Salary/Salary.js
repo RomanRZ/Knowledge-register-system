@@ -1,4 +1,5 @@
 import React from 'react';
+import './Salary.scss';
 
 const Salary = props => {
   const { coders } = props.state.staff;
@@ -47,19 +48,26 @@ const Salary = props => {
   const minSen = Math.min(...allSenSalaries);
   const maxSen = Math.max(...allSenSalaries);
   return (
-    <div>
-      <h3>Salary report</h3>
-      <p>
-        Min: {min}, Average: {average}, Max: {max}
+    <div className='salary'>
+      <h3 className='salary__title'>Salary report</h3>
+      <h4 className='salary__subtitle'>IN GENERAL:</h4>
+      <p className='salary__content'>
+        Minimal salary: {min}, Average salary: {average},Maximum salary: {max}
       </p>
-      <p>
-        Jun min: {minJun}, jun aver: {averageJun}, jun max: {maxJun}
+      <h4 className='salary__subtitle'>Juniors:</h4>
+      <p className='salary__content'>
+        Minimal salary: {minJun}, Average salary: {averageJun}, Maximum salary:{' '}
+        {maxJun}
       </p>
-      <p>
-        mid min: {minMid}, mid aver: {averageMid}, mid max: {maxMid}
+      <h4 className='salary__subtitle'>Middles:</h4>
+      <p className='salary__content'>
+        Minimal salary: {minMid}, Average salary: {averageMid}, Maximum salary:{' '}
+        {maxMid}
       </p>
-      <p>
-        sen min: {minSen}, sen aver: {averageSen}, sen max: {maxSen}
+      <h4 className='salary__subtitle'>Seniors:</h4>
+      <p className='salary__content'>
+        Minimal salary: {minSen}, Average salary: {averageSen}, Maximum salary:{' '}
+        {maxSen}
       </p>
     </div>
   );

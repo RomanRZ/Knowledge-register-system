@@ -43,7 +43,13 @@
     position: relative;
     z-index: 1;
     height: 100%;
-    max-height: 500px;
+    max-height: 300px;
+    @media only screen and (min-width: 768px) {
+      max-height: 400px;
+    }
+    @media only screen and (min-width: 1200px) {
+      max-height: 500px;
+    }
 
     &--second {
       transform: translate(-100%, 0);

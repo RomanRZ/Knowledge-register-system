@@ -1,4 +1,5 @@
 import React from 'react';
+import './Sex.scss';
 
 const Sex = props => {
   const { coders } = props.state.staff;
@@ -9,9 +10,9 @@ const Sex = props => {
     return el.sex === 'female' ? acc + 1 : acc;
   }, 0);
   return (
-    <div>
-      <h3>Sex report</h3>
-      <p>
+    <div className='sex'>
+      <h3 className='sex__title'>Sex report</h3>
+      <p className='sex__content'>
         Male: {male}, Female: {female}
       </p>
     </div>

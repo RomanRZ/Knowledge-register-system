@@ -11,7 +11,7 @@ const Maps = () => (
     <YMaps>
       <Map
         width='100%'
-        defaultState={{ center: [50.45466, 30.5238], zoom: 15 }}
+        defaultState={{ center: [50.431048036294, 30.48749724403], zoom: 15 }}
       />
     </YMaps>
   </div>

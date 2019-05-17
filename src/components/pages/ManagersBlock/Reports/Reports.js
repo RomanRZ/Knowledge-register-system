@@ -18,13 +18,29 @@ const Reports = () => {
         reportsSubmitHandler,
         reportsChangeHandler
       }) => {
+        let clsPeople = 'reports__label';
+        let clsSex = 'reports__label';
+        let clsAge = 'reports__label';
+        let clsSalary = 'reports__label';
+        if (numberOfPeople) {
+          clsPeople += ' reports__label--checked';
+        }
+        if (sex) {
+          clsSex += ' reports__label--checked';
+        }
+        if (age) {
+          clsAge += ' reports__label--checked';
+        }
+        if (salary) {
+          clsSalary += ' reports__label--checked';
+        }
         return (
           <div className='reports'>
             <h3 className='reports__title'>Reports</h3>
             <form className='reports__form' onSubmit={reportsSubmitHandler}>
               <Input
                 labelName='Number of people'
-                labelClassName='reports__label'
+                labelClassName={clsPeople}
                 inputClassName='reports__checkbox'
                 inputType='checkbox'
                 inputName='numberOfPeople'
@@ -33,7 +49,7 @@ const Reports = () => {
               />
               <Input
                 labelName='Sex'
-                labelClassName='reports__label'
+                labelClassName={clsSex}
                 inputClassName='reports__checkbox'
                 inputType='checkbox'
                 inputName='sex'
@@ -42,7 +58,7 @@ const Reports = () => {
               />
               <Input
                 labelName='Age report'
-                labelClassName='reports__label'
+                labelClassName={clsAge}
                 inputClassName='reports__checkbox'
                 inputType='checkbox'
                 inputName='age'
@@ -51,7 +67,7 @@ const Reports = () => {
               />
               <Input
                 labelName='Salary'
-                labelClassName='reports__label'
+                labelClassName={clsSalary}
                 inputClassName='reports__checkbox'
                 inputType='checkbox'
                 inputName='salary'
@@ -59,10 +75,12 @@ const Reports = () => {
                 inputChangeHandler={reportsChangeHandler}
               />
             </form>
-            {numberOfPeople && <NumberOfPeople state={state} />}
-            {sex && <Sex state={state} />}
-            {age && <Age state={state} />}
-            {salary && <Salary state={state} />}
+            <div className='reports__result'>
+              {numberOfPeople && <NumberOfPeople state={state} />}
+              {sex && <Sex state={state} />}
+              {age && <Age state={state} />}
+              {salary && <Salary state={state} />}
+            </div>
           </div>
         );
       }}

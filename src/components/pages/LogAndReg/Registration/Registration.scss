@@ -1,16 +1,17 @@
-.search-engine {
-  width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
-  overflow: hidden;
+.registration {
   &__title {
     text-align: center;
     padding: 5px 0;
+
+    @media only screen and(min-width: 768px) {
+      padding: 10px 0;
+    }
+
+    @media only screen and(min-width: 1200px) {
+      padding: 15px 0;
+    }
   }
-  &__search-form {
-    display: flex;
-    flex-direction: column;
-  }
+
   &__input {
     display: inline-block;
     width: 100%;
@@ -55,7 +56,7 @@
     opacity: 0;
     z-index: 2;
 
-    &:hover ~ .search-engine__select-button {
+    &:hover ~ .registration__select-button {
       background: rgb(0, 137, 102);
     }
   }
@@ -103,6 +104,12 @@
     &:hover {
       background: rgb(40, 65, 91);
       cursor: pointer;
+    }
+    &:disabled {
+      background: gray;
+      &:hover {
+        cursor: not-allowed;
+      }
     }
 
     @media only screen and (min-width: 768px) {

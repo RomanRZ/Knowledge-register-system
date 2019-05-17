@@ -2,9 +2,9 @@
   "managers": [
     {
       "id": 1,
-      "name": "manager first",
+      "name": "manager 1",
       "category": "manager",
-      "password": "managerfirst"
+      "password": "manager1"
     },
     {
       "id": 2,
@@ -17,17 +17,18 @@
     {
       "id": 1,
       "fullyRegistered": true,
-      "name": "prorgammer first",
+      "name": "prog 1",
       "sex": "male",
       "category": "coder",
-      "password": "prorgammerfirst",
+      "password": "111111",
       "position": "Junior Front End Developer",
       "competence": "junior",
-      "experienceInYears": 0,
-      "experienceInMonth": 6,
+      "experienceYears": 0,
+      "experienceMonths": 6,
       "salary": 10,
       "prevExperience": "Lorem ipsum dolor sit amet,   eum veritatis provident impedit, optio eveniet?",
       "age": 22,
+      "contact": "777-444-22-11",
       "skills": {
         "JS": 3,
         "IDE": 3,
@@ -47,11 +48,12 @@
       "password": "prorgammersecond",
       "position": "Middle Front End Developer",
       "competence": "middle",
-      "experienceInYears": 2,
-      "experienceInMonth": 6,
+      "experienceYears": 2,
+      "experienceMonths": 6,
       "salary": 30,
       "prevExperience": "consectetur adipisicing elit. Libero fuga sit",
       "age": 29,
+      "contact": "777-555-22-11",
       "skills": {
         "JS": 4,
         "IDE": 4,
@@ -71,11 +73,12 @@
       "password": "prorgammerthird",
       "position": "Middle Front End Developer",
       "competence": "middle",
-      "experienceInYears": 4,
-      "experienceInMonth": 2,
+      "experienceYears": 4,
+      "experienceMonths": 2,
       "salary": 35,
       "prevExperience": "perspiciatis magni placeat ab doloribus cupiditate aspernatur, molestias",
       "age": 27,
+      "contact": "777-444-22-11",
       "skills": {
         "JS": 3,
         "IDE": 4,
@@ -95,11 +98,12 @@
       "password": "prorgammerfourth",
       "position": "Senior Front End Developer",
       "competence": "senior",
-      "experienceInYears": 7,
-      "experienceInMonth": 9,
+      "experienceYears": 7,
+      "experienceMonths": 9,
       "salary": 60,
       "prevExperience": ", omnis architecto eaque repellendus eligendi debitis dolores",
       "age": 33,
+      "contact": "779-444-22-11",
       "skills": {
         "JS": 5,
         "IDE": 5,
@@ -108,6 +112,56 @@
         "preprocessors": 4,
         "HtmlCssLibs": 3,
         "JSlibs": 5
+      }
+    },
+    {
+      "id": 5,
+      "fullyRegistered": true,
+      "name": "prorgammer fifth",
+      "sex": "female",
+      "category": "coder",
+      "password": "prorgammerfifth",
+      "position": "Senior Front End Developer",
+      "competence": "senior",
+      "experienceYears": 6,
+      "experienceMonths": 2,
+      "salary": 65,
+      "prevExperience": ", php, Node js, C#, omnis architecto eaque repellendus eligendi debitis dolores",
+      "age": 30,
+      "contact": "779-666-22-11",
+      "skills": {
+        "JS": 5,
+        "IDE": 4,
+        "bundlers": 5,
+        "HtmlCss": 3,
+        "preprocessors": 4,
+        "HtmlCssLibs": 3,
+        "JSlibs": 5
+      }
+    },
+    {
+      "id": 6,
+      "fullyRegistered": true,
+      "name": "prorgammer sixth",
+      "sex": "male",
+      "category": "coder",
+      "password": "prorgammersixth",
+      "position": "Middle Front End Developer",
+      "competence": "middle",
+      "experienceYears": 3,
+      "experienceMonths": 4,
+      "salary": 30,
+      "prevExperience": ", Lorem ipsum dolor asdasdasdasd asdasdasd asfsdfsdf sd fsdf sdf fg d",
+      "age": 26,
+      "contact": "779-446-22-81",
+      "skills": {
+        "JS": 3,
+        "IDE": 3,
+        "bundlers": 2,
+        "HtmlCss": 4,
+        "preprocessors": 4,
+        "HtmlCssLibs": 3,
+        "JSlibs": 3
       }
     }
   ]

@@ -2,7 +2,9 @@ import React from 'react';
 import Input from '../../../UI/Input/Input';
 import Select from '../../../UI/Select/Select';
 import FormErrors from '../../../UI/FormErrors/FormErrors';
+import SearchResult from './SearchResult/SearchResult';
 import { Context } from '../../../Provider/Provider';
+import './SearchEngine.scss';
 
 const SearchEngine = () => {
   return (
@@ -11,7 +13,11 @@ const SearchEngine = () => {
         state: {
           searchEngine: { search, competence, expYears, skill, age },
           validation: {
-            searchEngine: { formValid, formErrors }
+            searchEngine: {
+              formValid,
+              formErrors,
+              formErrors: { expErrorMessage, ageErrorMessage }
+            }
           },
           requestedCoders
         },
@@ -19,12 +25,25 @@ const SearchEngine = () => {
         searchSubmitHandler,
         searchSortSubmitHandler
       }) => {
-        console.log(formErrors);
+        let inputExpCls = 'search-engine__input';
+        if (expErrorMessage !== '') {
+          inputExpCls += ' search-engine__input--error';
+        }
+        let inputAgeCls = 'search-engine__input';
+        if (ageErrorMessage !== '') {
+          inputAgeCls += ' search-engine__input--error';
+        }
         return (
-          <div>
-            <h3>Search Engine</h3>
-            <form onSubmit={searchSubmitHandler}>
+          <div className='search-engine'>
+            <h3 className='search-engine__title'>Search Engine</h3>
+            <form
+              className='search-engine__search-form'
+              onSubmit={searchSubmitHandler}
+            >
               <Input
+                labelName='Search'
+                labelClassName='search-engine__label'
+                inputClassName='search-engine__input'
                 inputType='text'
                 inputName='search'
                 inputValue={search}
@@ -32,7 +51,10 @@ const SearchEngine = () => {
                 inputPlaceholder='Search'
               />
               <Select
-                labelName='Competence'
+                selectClassName='search-engine__select'
+                selectWrapClassName='search-engine__select-wrap'
+                selectButtonClassName='search-engine__select-button'
+                selectButtonValue='Choose category of programmers'
                 selectName='competence'
                 selectValue={competence}
                 selectInfo={{
@@ -45,6 +67,8 @@ const SearchEngine = () => {
               />
               <Input
                 labelName='Minimum experience from'
+                labelClassName='search-engine__label'
+                inputClassName={inputExpCls}
                 inputType='text'
                 inputName='expYears'
                 inputValue={expYears}
@@ -52,7 +76,9 @@ const SearchEngine = () => {
                 inputPlaceholder='Enter experience..'
               />
               <Input
-                labelName='Age not more then'
+                labelName='Age not more than'
+                labelClassName='search-engine__label'
+                inputClassName={inputAgeCls}
                 inputType='text'
                 inputName='age'
                 inputValue={age}
@@ -61,15 +87,22 @@ const SearchEngine = () => {
               />
               <FormErrors formErrors={formErrors} />
               <Input
+                inputClassName='search-engine__submit'
                 inputType='submit'
                 inputValue='Find coders'
                 inputDisabled={!formValid}
               />
             </form>
             {requestedCoders.length !== 0 ? (
-              <form onSubmit={searchSortSubmitHandler}>
+              <form
+                className='search-engine__filter-form'
+                onSubmit={searchSortSubmitHandler}
+              >
                 <Select
-                  labelName='Skill'
+                  selectClassName='search-engine__select'
+                  selectWrapClassName='search-engine__select-wrap'
+                  selectButtonClassName='search-engine__select-button'
+                  selectButtonValue='Choose main skill'
                   selectName='skill'
                   selectValue={skill}
                   selectInfo={{
@@ -83,41 +116,14 @@ const SearchEngine = () => {
                   }}
                   selectHandler={searchChangeHandler}
                 />
-                <input type='submit' value='Sort by technology' />
+                <Input
+                  inputClassName='search-engine__submit'
+                  inputType='submit'
+                  inputValue='Sort by technology'
+                />
               </form>
             ) : null}
-            {requestedCoders.map(person => {
-              const {
-                skills: {
-                  JS,
-                  IDE,
-                  bundlers,
-                  HtmlCss,
-                  preprocessors,
-                  HtmlCssLibs,
-                  JSlibs
-                }
-              } = person;
-              return (
-                <div key={person.id}>
-                  <h4>Name:{person.name}</h4>
-                  <div>Position: {person.position}</div>
-                  <div>Experience years: {person.experienceYears}</div>
-                  <div>Age: {person.age}</div>
-                  <div>Previous experience: {person.prevExperience}</div>
-                  <h5>Skills</h5>
-                  <ul>
-                    <li>JS: {JS}</li>
-                    <li>IDE: {IDE}</li>
-                    <li>bundlers: {bundlers}</li>
-                    <li>HTML/CSS: {HtmlCss}</li>
-                    <li>preprocessors: {preprocessors}</li>
-                    <li>HTML CSS libs: {HtmlCssLibs}</li>
-                    <li>JS libs: {JSlibs}</li>
-                  </ul>
-                </div>
-              );
-            })}
+            <SearchResult requestedCoders={requestedCoders} />
           </div>
         );
       }}

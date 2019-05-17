@@ -100,7 +100,7 @@ const Navigation = () => {
                     to='/logAndReg'
                     onClick={toggleMenu}
                   >
-                    Autorization / Registration
+                    Authorization / Registration
                   </NavLink>
                 )}
               </li>

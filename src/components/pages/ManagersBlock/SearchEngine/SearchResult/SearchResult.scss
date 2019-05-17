@@ -1,0 +1,38 @@
+.search-result {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  @media only screen and (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__container {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #fff;
+
+    @media only screen and (min-width: 768px) {
+      width: 50%;
+    }
+    @media only screen and (min-width: 1200px) {
+      width: 33.33%;
+    }
+    @media only screen and (min-width: 1440px) {
+      width: 25%;
+    }
+  }
+  &__title {
+    text-decoration: underline;
+    text-align: center;
+    padding: 5px 0;
+  }
+
+  &__subtitle {
+    font-style: italic;
+    padding: 5px 0;
+  }
+  &__skill {
+    list-style: none;
+    padding-left: 10px;
+  }
+}
