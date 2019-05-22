@@ -7,7 +7,10 @@ const Contacts = () => {
     <div className='contacts'>
       <h3 className='contacts__title'>Contacts</h3>
       <h4 className='contacts__subtitle'>
-        Ukrane, Kiev, Kudryashova 18, Phone: 044-555-444-888
+        Ukrane, Kiev, Kudryashova 18, Phone:{' '}
+        <a className='contacts__phone' href='tel:+3804455544488'>
+          +38-044-555-444-88
+        </a>
       </h4>
       <Maps />
     </div>

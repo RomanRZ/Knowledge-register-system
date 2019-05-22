@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import Registration from './Registration/Registration';
-import Auth from './Auth/Auth';
+import RegistrationContainer from '../../../сontainers/RegistrationContainer';
+import AuthContainer from '../../../сontainers/AuthContainer';
 import Input from '../../UI/Input/Input';
 import { Context } from '../../Provider/Provider';
 import './LogAndReg.scss';
@@ -8,11 +8,18 @@ import './LogAndReg.scss';
 const LogAndReg = () => {
   return (
     <Context.Consumer>
-      {({ state: { coderIsLogged, managerIsLogged }, logOut }) => {
+      {({
+        state: { coderIsLogged, managerIsLogged, staff, alreadyRegistered },
+        logOut,
+        authCoder,
+        authManager,
+        addPerson
+      }) => {
         let user = null;
         if (coderIsLogged || managerIsLogged) {
           coderIsLogged ? (user = 'Programmer') : (user = 'Manager');
         }
+
         return (
           <div className='log-reg'>
             {user ? (
@@ -29,8 +36,15 @@ const LogAndReg = () => {
               </Fragment>
             ) : (
               <Fragment>
-                <Auth />
-                <Registration />
+                <AuthContainer
+                  staff={staff}
+                  authCoder={authCoder}
+                  authManager={authManager}
+                />
+                <RegistrationContainer
+                  alreadyRegistered={alreadyRegistered}
+                  addPerson={addPerson}
+                />
               </Fragment>
             )}
           </div>

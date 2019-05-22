@@ -2,7 +2,7 @@ import React from 'react';
 import './FormErrors.scss';
 
 const FormErrors = ({ alreadyRegistered, formErrors }) => {
-  console.log(alreadyRegistered);
+  console.log('already registered: ', alreadyRegistered);
   return (
     <div className='form-errors'>
       {Object.keys(formErrors).map((error, index) => {

@@ -3,14 +3,14 @@ export const Context = React.createContext();
 
 export default class Provider extends Component {
   state = {
-    auth: { name: '', password: '' },
-    userIsNotCreated: '',
+    // auth: { name: '', password: '' },
+    // userIsNotCreated: '',
     alreadyRegistered: '',
-    registration: { name: '', password: '', category: 'select' },
+    // registration: { name: '', password: '', category: 'select' },
     staff: null,
     authStatus: 'guest',
     coderIsLogged: false,
-    managerIsLogged: true,
+    managerIsLogged: false,
     menuIsShown: false,
     codersBlock: {
       currentCodersName: '',
@@ -47,26 +47,26 @@ export default class Provider extends Component {
     },
     requestedCoders: [],
     validation: {
-      registration: {
-        formValid: false,
-        categoryValid: false,
-        nameValid: false,
-        passwordValid: false,
-        formErrors: {
-          categoryErrorMessage: '',
-          nameErrorMessage: '',
-          passwordErrorMessage: ''
-        }
-      },
-      authorization: {
-        formValid: false,
-        nameValid: false,
-        passwordValid: false,
-        formErrors: {
-          nameErrorMessage: '',
-          passwordErrorMessage: ''
-        }
-      },
+      // registration: {
+      //   formValid: false,
+      //   categoryValid: false,
+      //   nameValid: false,
+      //   passwordValid: false,
+      //   formErrors: {
+      //     categoryErrorMessage: '',
+      //     nameErrorMessage: '',
+      //     passwordErrorMessage: ''
+      //   }
+      // },
+      // authorization: {
+      //   formValid: false,
+      //   nameValid: false,
+      //   passwordValid: false,
+      //   formErrors: {
+      //     nameErrorMessage: '',
+      //     passwordErrorMessage: ''
+      //   }
+      // },
       searchEngine: {
         formValid: true,
         expYearsValid: true,
@@ -113,14 +113,6 @@ export default class Provider extends Component {
   };
   // Header
   toggleMenu = () => {
-    // console.log(window.screen.width);
-    // if (window.screen.width < 992) {
-    //   this.setState(({ menuIsShown }) => {
-    //     return {
-    //       menuIsShown: !menuIsShown
-    //     };
-    //   });
-    // }
     this.setState(({ menuIsShown }) => {
       return {
         menuIsShown: !menuIsShown
@@ -129,149 +121,37 @@ export default class Provider extends Component {
   };
 
   // Authorization
-  // Validation in the authorization
-  authValidateField = (fieldName, value) => {
-    let {
-      validation,
-      validation: {
-        authorization,
-        authorization: {
-          formErrors,
-          nameValid,
-          passwordValid,
-          formErrors: { nameErrorMessage, passwordErrorMessage }
-        }
-      }
-    } = this.state;
-    switch (fieldName) {
-      case 'name':
-        nameValid = value.match(/^[\wа-яА-ЯЁё]+?\s[\wа-яА-ЯЁё]+$/i)
-          ? true
-          : false;
-        nameErrorMessage = nameValid
-          ? ''
-          : "Name error. The name must contain 'Name Surname' with one space between. Example: 1) Ivan Ivanov 2) petr petrov98";
-        break;
-      case 'password':
-        passwordValid =
-          value.match(/^[\wа-яА-ЯЁё0-9]+$/i) && value.length > 5 ? true : false;
-        passwordErrorMessage = passwordValid
-          ? ''
-          : 'Password error. The password must cantain 6 or more letters/numbers without spaces';
-        break;
-      default:
-        break;
-    }
-
-    this.setState(
-      {
-        validation: {
-          ...validation,
-          authorization: {
-            ...authorization,
-            nameValid: nameValid,
-            passwordValid: passwordValid,
-            formErrors: {
-              ...formErrors,
-              nameErrorMessage: nameErrorMessage,
-              passwordErrorMessage: passwordErrorMessage
-            }
+  authCoder = user => {
+    this.setState(({ coderIsLogged, codersBlock }) => {
+      return {
+        authStatus: user.category,
+        coderIsLogged: !coderIsLogged,
+        codersBlock: {
+          ...codersBlock,
+          currentCodersName: user.name,
+          currentCodersPassword: user.password,
+          sex: user.sex,
+          position: user.position,
+          experienceYears: user.experienceYears,
+          experienceMonths: user.experienceMonths,
+          salary: user.salary,
+          prevExperience: user.prevExperience,
+          age: user.age,
+          skills: {
+            ...user.skills
           }
         }
-      },
-      () => this.authValidateForm()
-    );
-  };
-  authValidateForm = () => {
-    const {
-      validation,
-      validation: {
-        authorization,
-        authorization: { nameValid, passwordValid }
-      }
-    } = this.state;
-    this.setState({
-      validation: {
-        ...validation,
-        authorization: {
-          ...authorization,
-          formValid: nameValid && passwordValid
-        }
-      }
+      };
     });
   };
-  authChangeHandler = e => {
-    const name = e.target.name;
-    const value = e.target.value;
-    this.setState(
-      { userIsNotCreated: '', auth: { ...this.state.auth, [name]: value } },
-      () => this.authValidateField(name, value)
-    );
-  };
-  authSubmitHandler = e => {
-    const { name, password } = this.state.auth;
-    this.logIn({ name, password });
-    this.setState({ auth: { name: '', password: '' } });
-    e.preventDefault();
-  };
 
-  logIn = person => {
-    const { staff } = this.state;
-
-    // Checking managers
-    let user = staff.managers.find(human => {
-      if (human.name === person.name && human.password === person.password) {
-        return true;
-      }
-      return false;
+  authManager = user => {
+    this.setState(({ managerIsLogged }) => {
+      return {
+        authStatus: user.category,
+        managerIsLogged: !managerIsLogged
+      };
     });
-    // Checking coders
-    if (!user) {
-      user = staff.coders.find(human => {
-        if (human.name === person.name && human.password === person.password) {
-          return true;
-        }
-        return false;
-      });
-    }
-    // Checking if nobody was registered
-    if (!user) {
-      this.setState({ userIsNotCreated: 'User is not created' });
-      return;
-    }
-
-    if (user.category === 'coder') {
-      this.setState(({ coderIsLogged, codersBlock }) => {
-        return {
-          authStatus: user.category,
-          coderIsLogged: !coderIsLogged,
-          codersBlock: {
-            ...codersBlock,
-            currentCodersName: user.name,
-            currentCodersPassword: user.password,
-            sex: user.sex,
-            position: user.position,
-            experienceYears: user.experienceYears,
-            experienceMonths: user.experienceMonths,
-            salary: user.salary,
-            prevExperience: user.prevExperience,
-            age: user.age,
-            skills: {
-              ...user.skills
-            }
-          }
-        };
-      });
-    }
-
-    if (user.category === 'manager') {
-      this.setState(({ managerIsLogged }) => {
-        return {
-          authStatus: user.category,
-          managerIsLogged: !managerIsLogged
-        };
-      });
-    }
   };
 
   logOut = () => {
@@ -305,128 +185,8 @@ export default class Provider extends Component {
   };
 
   // Registration
-  regChangeHandler = e => {
-    const name = e.target.name;
-    const value = e.target.value;
-
-    this.setState(
-      {
-        registration: { ...this.state.registration, [name]: value }
-      },
-      () => this.regValidateField(name, value)
-    );
-  };
-  regSubmitHandler = e => {
-    const {
-      registration: { name, password, category }
-    } = this.state;
-    category === 'coder'
-      ? this.addPerson({
-          name,
-          password,
-          category,
-          id: new Date().getTime(),
-          fullyRegistered: false
-        })
-      : this.addPerson({
-          name,
-          password,
-          category,
-          id: new Date().getTime()
-        });
-    e.preventDefault();
-  };
-  // Registration form validation
-  regValidateField = (fieldName, value) => {
-    let {
-      validation,
-      validation: {
-        registration,
-        registration: {
-          categoryValid,
-          nameValid,
-          passwordValid,
-          formErrors,
-          formErrors: {
-            categoryErrorMessage,
-            nameErrorMessage,
-            passwordErrorMessage
-          }
-        }
-      }
-    } = this.state;
-
-    switch (fieldName) {
-      case 'category':
-        categoryValid = value !== 'select';
-        categoryErrorMessage = categoryValid
-          ? ''
-          : 'Category error. Please, choose category';
-        break;
-      case 'name':
-        nameValid = value.match(/^[\wа-яА-ЯЁё]+?\s[\wа-яА-ЯЁё]+$/i)
-          ? true
-          : false;
-        nameErrorMessage = nameValid
-          ? ''
-          : "Name error. The name must contain 'Name Surname' with one space between. Example: 1) Ivan Ivanov 2) petr petrov98";
-        break;
-      case 'password':
-        passwordValid =
-          value.match(/^[\wа-яА-ЯЁё0-9]+$/i) && value.length > 5 ? true : false;
-        passwordErrorMessage = passwordValid
-          ? ''
-          : 'Password error. The password must cantain 6 or more letters/numbers without spaces';
-        break;
-      default:
-        break;
-    }
-    this.setState(
-      {
-        validation: {
-          ...validation,
-          registration: {
-            ...registration,
-            categoryValid: categoryValid,
-            nameValid: nameValid,
-            passwordValid: passwordValid,
-            formErrors: {
-              ...formErrors,
-              categoryErrorMessage: categoryErrorMessage,
-              nameErrorMessage: nameErrorMessage,
-              passwordErrorMessage: passwordErrorMessage
-            }
-          }
-        }
-      },
-      this.regValidateForm
-    );
-  };
-  regValidateForm = () => {
-    const {
-      validation,
-      validation: {
-        registration,
-        registration: { categoryValid, nameValid, passwordValid }
-      }
-    } = this.state;
-    this.setState({
-      validation: {
-        ...validation,
-        registration: {
-          ...registration,
-          formValid: categoryValid && nameValid && passwordValid
-        }
-      }
-    });
-  };
-
-  addPerson = newPerson => {
-    const {
-      staff,
-      validation,
-      validation: { registration }
-    } = this.state; // {managers: [], coders: []}
+  addPerson = (newPerson, cleaningCallback) => {
+    const { staff } = this.state; // {managers: [], coders: []}
     // here finding alredy registereds
     if (newPerson.category === 'manager') {
       const alreadyRegistered = staff.managers
@@ -446,23 +206,9 @@ export default class Provider extends Component {
         },
         () => {
           this.setState({
-            alreadyRegistered: '',
-            registration: {
-              name: '',
-              password: '',
-              category: 'select'
-            },
-            validation: {
-              ...validation,
-              registration: {
-                ...registration,
-                categoryValid: false,
-                nameValid: false,
-                passwordValid: false,
-                formValid: false
-              }
-            }
+            alreadyRegistered: ''
           });
+          cleaningCallback();
         }
       );
     }
@@ -484,23 +230,9 @@ export default class Provider extends Component {
         },
         () => {
           this.setState({
-            alreadyRegistered: '',
-            registration: {
-              name: '',
-              password: '',
-              category: 'select'
-            },
-            validation: {
-              ...validation,
-              registration: {
-                ...registration,
-                categoryValid: false,
-                nameValid: false,
-                passwordValid: false,
-                formValid: false
-              }
-            }
+            alreadyRegistered: ''
           });
+          cleaningCallback();
         }
       );
     }
@@ -943,10 +675,9 @@ export default class Provider extends Component {
           logOut: this.logOut,
           codersChangeHandler: this.codersChangeHandler,
           addCoderIntoDataBase: this.addCoderIntoDataBase,
-          authChangeHandler: this.authChangeHandler,
-          authSubmitHandler: this.authSubmitHandler,
-          regChangeHandler: this.regChangeHandler,
-          regSubmitHandler: this.regSubmitHandler,
+          authCoder: this.authCoder,
+          authManager: this.authManager,
+          addPerson: this.addPerson,
           reportsSubmitHandler: this.reportsSubmitHandler,
           reportsChangeHandler: this.reportsChangeHandler,
           searchChangeHandler: this.searchChangeHandler,
