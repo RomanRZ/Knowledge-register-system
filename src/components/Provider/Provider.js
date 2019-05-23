@@ -3,13 +3,10 @@ export const Context = React.createContext();
 
 export default class Provider extends Component {
   state = {
-    // auth: { name: '', password: '' },
-    // userIsNotCreated: '',
     alreadyRegistered: '',
-    // registration: { name: '', password: '', category: 'select' },
     staff: null,
     authStatus: 'guest',
-    coderIsLogged: false,
+    coderIsLogged: true,
     managerIsLogged: false,
     menuIsShown: false,
     codersBlock: {
@@ -32,50 +29,7 @@ export default class Provider extends Component {
         JSlibs: '0'
       }
     },
-    reports: {
-      numberOfPeople: false,
-      sex: false,
-      age: false,
-      salary: false
-    },
-    searchEngine: {
-      search: '',
-      competence: 'all',
-      expYears: '',
-      age: '',
-      skill: 'JS'
-    },
-    requestedCoders: [],
     validation: {
-      // registration: {
-      //   formValid: false,
-      //   categoryValid: false,
-      //   nameValid: false,
-      //   passwordValid: false,
-      //   formErrors: {
-      //     categoryErrorMessage: '',
-      //     nameErrorMessage: '',
-      //     passwordErrorMessage: ''
-      //   }
-      // },
-      // authorization: {
-      //   formValid: false,
-      //   nameValid: false,
-      //   passwordValid: false,
-      //   formErrors: {
-      //     nameErrorMessage: '',
-      //     passwordErrorMessage: ''
-      //   }
-      // },
-      searchEngine: {
-        formValid: true,
-        expYearsValid: true,
-        ageValid: true,
-        formErrors: {
-          expErrorMessage: '',
-          ageErrorMessage: ''
-        }
-      },
       codersBlock: {
         formValid: false,
         sexValid: false,
@@ -236,164 +190,6 @@ export default class Provider extends Component {
         }
       );
     }
-  };
-  // Search Engine =============================
-  requestHandler = (search, competence, expYears, age) => {
-    const {
-      staff: { coders }
-    } = this.state;
-    const requiredCoders = coders
-      .filter(person => {
-        if (search === '') {
-          return true;
-        }
-        if (search !== '') {
-          const values = [];
-          for (let key in person) {
-            if (typeof person[key] === 'string') {
-              values.push(person[key].toLowerCase());
-            }
-          }
-          for (let i = 0; i < values.length; i++) {
-            if (values[i].indexOf(search.toLowerCase()) >= 0) {
-              return true;
-            }
-          }
-        }
-        return false;
-      })
-      .filter(person => {
-        if (competence === 'all') {
-          return true;
-        }
-        if (person.competence === competence) {
-          return true;
-        }
-        return false;
-      })
-      .filter(person => {
-        if (expYears !== '') {
-          if (person.experienceYears < expYears) {
-            return false;
-          }
-        }
-        return true;
-      })
-      .filter(person => {
-        if (age !== '') {
-          if (person.age > age) {
-            return false;
-          }
-        }
-        return true;
-      })
-      .filter(person => {
-        if (person.fullyRegistered) {
-          return true;
-        }
-        return false;
-      });
-
-    this.setState({ requestedCoders: requiredCoders });
-  };
-
-  sortBy = skill => {
-    const { requestedCoders } = this.state;
-    const sortedCoders = requestedCoders.map(person => {
-      return { ...person, skills: { ...person.skills } };
-    });
-    sortedCoders.sort((a, b) => {
-      if (a.skills[skill] > b.skills[skill]) return -1;
-      if (a.skills[skill] < b.skills[skill]) return 1;
-      return 0;
-    });
-    this.setState({ requestedCoders: sortedCoders });
-  };
-  // Search engine validation
-  searchValidateField = (fieldName, value) => {
-    let {
-      validation,
-      validation: {
-        searchEngine,
-        searchEngine: {
-          expYearsValid,
-          ageValid,
-          formErrors,
-          formErrors: { expErrorMessage, ageErrorMessage }
-        }
-      }
-    } = this.state;
-    switch (fieldName) {
-      case 'expYears':
-        expYearsValid = value.match(/^[1-9]?[0-9]?$/) ? true : false;
-        expErrorMessage = expYearsValid
-          ? ''
-          : 'Experience error. Only 2 numbers';
-        break;
-      case 'age':
-        ageValid = value.match(/^([1-9][0-9])?$/) ? true : false;
-        ageErrorMessage = ageValid ? '' : 'Age error';
-        break;
-      default:
-        break;
-    }
-    this.setState(
-      {
-        validation: {
-          ...validation,
-          searchEngine: {
-            ...searchEngine,
-            expYearsValid: expYearsValid,
-            ageValid: ageValid,
-            formErrors: {
-              ...formErrors,
-              expErrorMessage: expErrorMessage,
-              ageErrorMessage: ageErrorMessage
-            }
-          }
-        }
-      },
-      () => {
-        const {
-          validation,
-          validation: {
-            searchEngine,
-            searchEngine: { expYearsValid, ageValid }
-          }
-        } = this.state;
-
-        this.setState({
-          validation: {
-            ...validation,
-            searchEngine: {
-              ...searchEngine,
-              formValid: expYearsValid && ageValid
-            }
-          }
-        });
-      }
-    );
-  };
-
-  searchChangeHandler = e => {
-    const name = e.target.name;
-    const value = e.target.value;
-    this.setState(
-      {
-        searchEngine: { ...this.state.searchEngine, [name]: value }
-      },
-      () => this.searchValidateField(name, value)
-    );
-  };
-  searchSubmitHandler = e => {
-    const { search, competence, expYears, age } = this.state.searchEngine;
-    this.requestHandler(search, competence, expYears, age);
-    e.preventDefault();
-  };
-  searchSortSubmitHandler = e => {
-    const { skill } = this.state.searchEngine;
-    this.sortBy(skill);
-    e.preventDefault();
   };
 
   //  FOR coders block
