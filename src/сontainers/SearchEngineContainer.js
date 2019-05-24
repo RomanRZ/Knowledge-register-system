@@ -23,6 +23,7 @@ export default class SearchEngineContainer extends Component {
       staff: { coders }
     } = this.props.state;
     const requiredCoders = coders
+      // Search
       .filter(person => {
         if (search === '') {
           return true;
@@ -42,6 +43,7 @@ export default class SearchEngineContainer extends Component {
         }
         return false;
       })
+      // Competence
       .filter(person => {
         if (competence === 'all') {
           return true;
@@ -51,14 +53,17 @@ export default class SearchEngineContainer extends Component {
         }
         return false;
       })
+      // Experience in years
       .filter(person => {
-        if (expYears !== '') {
-          if (person.experienceYears < expYears) {
-            return false;
-          }
+        if (expYears !== '' && person.experienceYears >= expYears) {
+          return true;
         }
-        return true;
+        if (expYears === '') {
+          return true;
+        }
+        return false;
       })
+      // Age
       .filter(person => {
         if (age !== '') {
           if (person.age > age) {
@@ -67,6 +72,7 @@ export default class SearchEngineContainer extends Component {
         }
         return true;
       })
+      // Is programmer full?
       .filter(person => {
         if (person.fullyRegistered) {
           return true;

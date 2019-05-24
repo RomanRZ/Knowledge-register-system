@@ -60,7 +60,7 @@ const SearchEngine = ({
           />
         </label>
         <Input
-          labelName='Minimum experience from'
+          labelName='Minimum experience in years from'
           labelClassName='search-engine__label'
           inputClassName={inputExpCls}
           inputType='text'
@@ -120,6 +120,7 @@ const SearchEngine = ({
           />
         </form>
       ) : null}
+      <h4>Result: {requestedCoders.length} programmers were found.</h4>
       <SearchResult requestedCoders={requestedCoders} />
     </div>
   );

@@ -104,7 +104,31 @@ export default class AuthContainer extends Component {
     }
 
     if (user.category === 'coder') {
-      authCoder(user);
+      if (user.fullyRegistered) {
+        authCoder(user);
+      }
+      if (!user.fullyRegistered) {
+        const emptyUser = {
+          ...user,
+          sex: 'select',
+          position: 'select',
+          experienceYears: '',
+          experienceMonths: 'select',
+          salary: '',
+          prevExperience: '',
+          age: '',
+          skills: {
+            JS: '0',
+            IDE: '0',
+            bundlers: '0',
+            HtmlCss: '0',
+            preprocessors: '0',
+            HtmlCssLibs: '0',
+            JSlibs: '0'
+          }
+        };
+        authCoder(emptyUser);
+      }
     }
 
     if (user.category === 'manager') {

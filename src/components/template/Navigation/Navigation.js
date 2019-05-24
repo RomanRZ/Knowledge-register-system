@@ -6,7 +6,6 @@ import './Navigation.scss';
 import toggle from '../../../img/burger-menu.png';
 
 const Navigation = () => {
-  // let cls = 'nav';
   return (
     <Context.Consumer>
       {({

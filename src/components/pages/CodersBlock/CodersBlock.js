@@ -32,28 +32,25 @@ const CodersBlock = () => {
             codersBlock: {
               formValid,
               formErrors,
-              formErrors: {
-                sexError,
-                positionError,
-                expYearsError,
-                expMonthsError,
-                salaryError,
-                ageError,
-                jsError,
-                ideError,
-                bundlersError,
-                htmlCssError,
-                preprocessorsError,
-                htmlCssLibsError,
-                jsLibsError
-              }
+              formErrors: { expYearsError, salaryError, ageError }
             }
           }
         },
         codersChangeHandler,
         addCoderIntoDataBase
       }) => {
-        console.log(formErrors);
+        let expYearsCls = 'coders-block__input';
+        let salaryCls = 'coders-block__input';
+        let ageCls = 'coders-block__input';
+        if (expYearsError !== '') {
+          expYearsCls += ' coders-block__input--error';
+        }
+        if (salaryError !== '') {
+          salaryCls += ' coders-block__input--error';
+        }
+        if (ageError !== '') {
+          ageCls += ' coders-block__input--error';
+        }
         return (
           <div className='coders-block'>
             <h2 className='coders-block__title'>Codder's block</h2>
@@ -61,40 +58,46 @@ const CodersBlock = () => {
               className='coders-block__reg-submit'
               onSubmit={addCoderIntoDataBase}
             >
-              <Select
-                selectClassName='coders-block__select'
-                selectWrapClassName='coders-block__select-wrap'
-                selectButtonClassName='coders-block__select-button'
-                selectButtonValue='Choose sex'
-                selectName='sex'
-                selectValue={sex}
-                selectInfo={{
-                  select: '--select--',
-                  male: 'Male',
-                  female: 'Female'
-                }}
-                selectHandler={codersChangeHandler}
-              />
+              <label>
+                Choose sex
+                <Select
+                  selectClassName='coders-block__select'
+                  selectWrapClassName='coders-block__select-wrap'
+                  selectButtonClassName='coders-block__select-button'
+                  selectButtonValue={sex}
+                  selectName='sex'
+                  selectValue={sex}
+                  selectInfo={{
+                    select: '--select--',
+                    male: 'Male',
+                    female: 'Female'
+                  }}
+                  selectHandler={codersChangeHandler}
+                />
+              </label>
 
-              <Select
-                selectClassName='coders-block__select'
-                selectWrapClassName='coders-block__select-wrap'
-                selectButtonClassName='coders-block__select-button'
-                selectButtonValue='Choose position'
-                selectName='position'
-                selectValue={position}
-                selectInfo={{
-                  select: '--select--',
-                  'Junior Front End Developer': 'Junior Front End Developer',
-                  'Middle Front End Developer': 'Middle Front End Developer',
-                  'Senior Front End Developer': 'Senior Front End Developer'
-                }}
-                selectHandler={codersChangeHandler}
-              />
+              <label>
+                Choose position
+                <Select
+                  selectClassName='coders-block__select'
+                  selectWrapClassName='coders-block__select-wrap'
+                  selectButtonClassName='coders-block__select-button'
+                  selectButtonValue={position}
+                  selectName='position'
+                  selectValue={position}
+                  selectInfo={{
+                    select: '--select--',
+                    'Junior Front End Developer': 'Junior Front End Developer',
+                    'Middle Front End Developer': 'Middle Front End Developer',
+                    'Senior Front End Developer': 'Senior Front End Developer'
+                  }}
+                  selectHandler={codersChangeHandler}
+                />
+              </label>
 
               <Input
                 labelClassName='coders-block__label'
-                inputClassName='coders-block__input'
+                inputClassName={expYearsCls}
                 labelName='Experience in years'
                 inputType='text'
                 inputName='experienceYears'
@@ -103,35 +106,38 @@ const CodersBlock = () => {
                 inputPlaceholder='Your experience years..'
               />
 
-              <Select
-                selectClassName='coders-block__select'
-                selectWrapClassName='coders-block__select-wrap'
-                selectButtonClassName='coders-block__select-button'
-                selectButtonValue='Choose experience in months'
-                selectName='experienceMonths'
-                selectValue={experienceMonths}
-                selectInfo={{
-                  select: '--select--',
-                  '0': '0',
-                  '1': '1',
-                  '2': '2',
-                  '3': '3',
-                  '4': '4',
-                  '5': '5',
-                  '6': '6',
-                  '7': '7',
-                  '8': '8',
-                  '9': '9',
-                  '10': '10',
-                  '11': '11',
-                  '12': '12'
-                }}
-                selectHandler={codersChangeHandler}
-              />
+              <label>
+                Choose experience in months
+                <Select
+                  selectClassName='coders-block__select'
+                  selectWrapClassName='coders-block__select-wrap'
+                  selectButtonClassName='coders-block__select-button'
+                  selectButtonValue={experienceMonths}
+                  selectName='experienceMonths'
+                  selectValue={experienceMonths}
+                  selectInfo={{
+                    select: '--select--',
+                    '0': '0',
+                    '1': '1',
+                    '2': '2',
+                    '3': '3',
+                    '4': '4',
+                    '5': '5',
+                    '6': '6',
+                    '7': '7',
+                    '8': '8',
+                    '9': '9',
+                    '10': '10',
+                    '11': '11',
+                    '12': '12'
+                  }}
+                  selectHandler={codersChangeHandler}
+                />
+              </label>
 
               <Input
                 labelClassName='coders-block__label'
-                inputClassName='coders-block__input'
+                inputClassName={salaryCls}
                 labelName='Salary'
                 inputType='text'
                 inputName='salary'
@@ -151,7 +157,7 @@ const CodersBlock = () => {
               />
               <Input
                 labelClassName='coders-block__label'
-                inputClassName='coders-block__input'
+                inputClassName={ageCls}
                 labelName='Age'
                 inputType='text'
                 inputName='age'
@@ -161,130 +167,151 @@ const CodersBlock = () => {
               />
               <div>
                 <h4 className='coders-block__subtitle'>Your skills</h4>
-                <Select
-                  selectClassName='coders-block__select'
-                  selectWrapClassName='coders-block__select-wrap'
-                  selectButtonClassName='coders-block__select-button'
-                  selectButtonValue='Choose JS skill'
-                  selectName='JS'
-                  selectValue={JS}
-                  selectInfo={{
-                    '0': 'Never used',
-                    '1': 'Superficial, used several times',
-                    '2': 'Passable, use from time to time ',
-                    '3': 'Normal, use often',
-                    '4': 'Extremely well, use frequently',
-                    '5': 'Perfect, use all the time'
-                  }}
-                  selectHandler={codersChangeHandler}
-                />
-                <Select
-                  selectClassName='coders-block__select'
-                  selectWrapClassName='coders-block__select-wrap'
-                  selectButtonClassName='coders-block__select-button'
-                  selectButtonValue='Choose IDE skill'
-                  selectName='IDE'
-                  selectValue={IDE}
-                  selectInfo={{
-                    '0': 'Never used',
-                    '1': 'Superficial, used several times',
-                    '2': 'Passable, use from time to time ',
-                    '3': 'Normal, use often',
-                    '4': 'Extremely well, use frequently',
-                    '5': 'Perfect, use all the time'
-                  }}
-                  selectHandler={codersChangeHandler}
-                />
+                <label>
+                  Choose JS skill
+                  <Select
+                    selectClassName='coders-block__select'
+                    selectWrapClassName='coders-block__select-wrap'
+                    selectButtonClassName='coders-block__select-button'
+                    selectButtonValue={JS}
+                    selectName='JS'
+                    selectValue={JS}
+                    selectInfo={{
+                      '0': 'Never used',
+                      '1': 'Superficial, used several times',
+                      '2': 'Passable, use from time to time ',
+                      '3': 'Normal, use often',
+                      '4': 'Extremely well, use frequently',
+                      '5': 'Perfect, use all the time'
+                    }}
+                    selectHandler={codersChangeHandler}
+                  />
+                </label>
+                <label>
+                  Choose IDE skill
+                  <Select
+                    selectClassName='coders-block__select'
+                    selectWrapClassName='coders-block__select-wrap'
+                    selectButtonClassName='coders-block__select-button'
+                    selectButtonValue={IDE}
+                    selectName='IDE'
+                    selectValue={IDE}
+                    selectInfo={{
+                      '0': 'Never used',
+                      '1': 'Superficial, used several times',
+                      '2': 'Passable, use from time to time ',
+                      '3': 'Normal, use often',
+                      '4': 'Extremely well, use frequently',
+                      '5': 'Perfect, use all the time'
+                    }}
+                    selectHandler={codersChangeHandler}
+                  />
+                </label>
 
-                <Select
-                  selectClassName='coders-block__select'
-                  selectWrapClassName='coders-block__select-wrap'
-                  selectButtonClassName='coders-block__select-button'
-                  selectButtonValue='Choose Bundlers skill'
-                  selectName='bundlers'
-                  selectValue={bundlers}
-                  selectInfo={{
-                    '0': 'Never used',
-                    '1': 'Superficial, used several times',
-                    '2': 'Passable, use from time to time ',
-                    '3': 'Normal, use often',
-                    '4': 'Extremely well, use frequently',
-                    '5': 'Perfect, use all the time'
-                  }}
-                  selectHandler={codersChangeHandler}
-                />
+                <label>
+                  Choose Bundlers skill
+                  <Select
+                    selectClassName='coders-block__select'
+                    selectWrapClassName='coders-block__select-wrap'
+                    selectButtonClassName='coders-block__select-button'
+                    selectButtonValue={bundlers}
+                    selectName='bundlers'
+                    selectValue={bundlers}
+                    selectInfo={{
+                      '0': 'Never used',
+                      '1': 'Superficial, used several times',
+                      '2': 'Passable, use from time to time ',
+                      '3': 'Normal, use often',
+                      '4': 'Extremely well, use frequently',
+                      '5': 'Perfect, use all the time'
+                    }}
+                    selectHandler={codersChangeHandler}
+                  />
+                </label>
 
-                <Select
-                  selectClassName='coders-block__select'
-                  selectWrapClassName='coders-block__select-wrap'
-                  selectButtonClassName='coders-block__select-button'
-                  selectButtonValue='Choose HTML/CSS skill'
-                  selectName='HtmlCss'
-                  selectValue={HtmlCss}
-                  selectInfo={{
-                    '0': 'Never used',
-                    '1': 'Superficial, used several times',
-                    '2': 'Passable, use from time to time ',
-                    '3': 'Normal, use often',
-                    '4': 'Extremely well, use frequently',
-                    '5': 'Perfect, use all the time'
-                  }}
-                  selectHandler={codersChangeHandler}
-                />
+                <label>
+                  Choose HTML/CSS skill
+                  <Select
+                    selectClassName='coders-block__select'
+                    selectWrapClassName='coders-block__select-wrap'
+                    selectButtonClassName='coders-block__select-button'
+                    selectButtonValue={HtmlCss}
+                    selectName='HtmlCss'
+                    selectValue={HtmlCss}
+                    selectInfo={{
+                      '0': 'Never used',
+                      '1': 'Superficial, used several times',
+                      '2': 'Passable, use from time to time ',
+                      '3': 'Normal, use often',
+                      '4': 'Extremely well, use frequently',
+                      '5': 'Perfect, use all the time'
+                    }}
+                    selectHandler={codersChangeHandler}
+                  />
+                </label>
 
-                <Select
-                  selectClassName='coders-block__select'
-                  selectWrapClassName='coders-block__select-wrap'
-                  selectButtonClassName='coders-block__select-button'
-                  selectButtonValue='Choose preprocessors skill'
-                  selectName='preprocessors'
-                  selectValue={preprocessors}
-                  selectInfo={{
-                    '0': 'Never used',
-                    '1': 'Superficial, used several times',
-                    '2': 'Passable, use from time to time ',
-                    '3': 'Normal, use often',
-                    '4': 'Extremely well, use frequently',
-                    '5': 'Perfect, use all the time'
-                  }}
-                  selectHandler={codersChangeHandler}
-                />
+                <label>
+                  Choose preprocessors skill
+                  <Select
+                    selectClassName='coders-block__select'
+                    selectWrapClassName='coders-block__select-wrap'
+                    selectButtonClassName='coders-block__select-button'
+                    selectButtonValue={preprocessors}
+                    selectName='preprocessors'
+                    selectValue={preprocessors}
+                    selectInfo={{
+                      '0': 'Never used',
+                      '1': 'Superficial, used several times',
+                      '2': 'Passable, use from time to time ',
+                      '3': 'Normal, use often',
+                      '4': 'Extremely well, use frequently',
+                      '5': 'Perfect, use all the time'
+                    }}
+                    selectHandler={codersChangeHandler}
+                  />
+                </label>
 
-                <Select
-                  selectClassName='coders-block__select'
-                  selectWrapClassName='coders-block__select-wrap'
-                  selectButtonClassName='coders-block__select-button'
-                  selectButtonValue='Choose HTML/CSS libraries skill'
-                  selectName='HtmlCssLibs'
-                  selectValue={HtmlCssLibs}
-                  selectInfo={{
-                    '0': 'Never used',
-                    '1': 'Superficial, used several times',
-                    '2': 'Passable, use from time to time ',
-                    '3': 'Normal, use often',
-                    '4': 'Extremely well, use frequently',
-                    '5': 'Perfect, use all the time'
-                  }}
-                  selectHandler={codersChangeHandler}
-                />
+                <label>
+                  Choose HTML/CSS libraries skill
+                  <Select
+                    selectClassName='coders-block__select'
+                    selectWrapClassName='coders-block__select-wrap'
+                    selectButtonClassName='coders-block__select-button'
+                    selectButtonValue={HtmlCssLibs}
+                    selectName='HtmlCssLibs'
+                    selectValue={HtmlCssLibs}
+                    selectInfo={{
+                      '0': 'Never used',
+                      '1': 'Superficial, used several times',
+                      '2': 'Passable, use from time to time ',
+                      '3': 'Normal, use often',
+                      '4': 'Extremely well, use frequently',
+                      '5': 'Perfect, use all the time'
+                    }}
+                    selectHandler={codersChangeHandler}
+                  />
+                </label>
 
-                <Select
-                  selectClassName='coders-block__select'
-                  selectWrapClassName='coders-block__select-wrap'
-                  selectButtonClassName='coders-block__select-button'
-                  selectButtonValue='Choose JS libraries skill'
-                  selectName='JSlibs'
-                  selectValue={JSlibs}
-                  selectInfo={{
-                    '0': 'Never used',
-                    '1': 'Superficial, used several times',
-                    '2': 'Passable, use from time to time ',
-                    '3': 'Normal, use often',
-                    '4': 'Extremely well, use frequently',
-                    '5': 'Perfect, use all the time'
-                  }}
-                  selectHandler={codersChangeHandler}
-                />
+                <label>
+                  Choose JS libraries skill
+                  <Select
+                    selectClassName='coders-block__select'
+                    selectWrapClassName='coders-block__select-wrap'
+                    selectButtonClassName='coders-block__select-button'
+                    selectButtonValue={JSlibs}
+                    selectName='JSlibs'
+                    selectValue={JSlibs}
+                    selectInfo={{
+                      '0': 'Never used',
+                      '1': 'Superficial, used several times',
+                      '2': 'Passable, use from time to time ',
+                      '3': 'Normal, use often',
+                      '4': 'Extremely well, use frequently',
+                      '5': 'Perfect, use all the time'
+                    }}
+                    selectHandler={codersChangeHandler}
+                  />
+                </label>
               </div>
 
               <Input

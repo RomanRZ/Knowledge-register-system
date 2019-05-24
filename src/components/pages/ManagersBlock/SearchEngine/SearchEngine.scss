@@ -104,7 +104,12 @@
       background: rgb(40, 65, 91);
       cursor: pointer;
     }
-
+    &:disabled {
+      background: gray;
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
     @media only screen and (min-width: 768px) {
       padding: 10px;
     }

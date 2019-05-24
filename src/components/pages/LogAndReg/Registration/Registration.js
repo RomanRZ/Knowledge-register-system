@@ -35,7 +35,7 @@ const Registration = ({
             selectClassName='registration__select'
             selectWrapClassName='registration__select-wrap'
             selectButtonClassName='registration__select-button'
-            selectButtonValue={category}
+            selectButtonValue={category === 'coder' ? 'Programmer' : category}
             labelName='Category'
             selectName='category'
             selectValue={category}

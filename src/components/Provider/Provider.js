@@ -6,8 +6,8 @@ export default class Provider extends Component {
     alreadyRegistered: '',
     staff: null,
     authStatus: 'guest',
-    coderIsLogged: true,
-    managerIsLogged: false,
+    coderIsLogged: false,
+    managerIsLogged: true,
     menuIsShown: false,
     codersBlock: {
       currentCodersName: '',
@@ -65,7 +65,7 @@ export default class Provider extends Component {
       }
     }
   };
-  // Header
+  // Header toggle button
   toggleMenu = () => {
     this.setState(({ menuIsShown }) => {
       return {
@@ -192,7 +192,7 @@ export default class Provider extends Component {
     }
   };
 
-  //  FOR coders block
+  //  Coder's block
   codersChangeHandler = e => {
     const name = e.target.name;
     const value = e.target.value;
@@ -219,7 +219,7 @@ export default class Provider extends Component {
       });
     }
   };
-  // When coder is registered but has empty profile
+
   // Validation Adding coder
   coderValidateField = (fieldName, value) => {
     let {
@@ -274,10 +274,22 @@ export default class Provider extends Component {
           : 'Position field error. Please, choose position';
         break;
       case 'experienceYears':
-        expYearsValid = value.match(/^[1-9]?[0-9]?$/) ? true : false;
-        expYearsError = expYearsValid
-          ? ''
-          : 'Experience in years field error. Only 2 numbers';
+        // expYearsValid = value.match(/^[1-9]?[0-9]?$/) ? true : false;
+        if (value !== '') {
+          value = Number(value);
+          expYearsValid =
+            typeof value === 'number' && value >= 0 && value <= 50;
+          expYearsError = expYearsValid
+            ? ''
+            : 'Experience error. Number from 0 to 50';
+        }
+        if (value === '') {
+          expYearsValid = false;
+          expYearsError = expYearsValid
+            ? ''
+            : 'Experience error. Number from 0 to 50';
+        }
+
         break;
       case 'experienceMonths':
         expMonthsValid = value !== 'select';
@@ -290,8 +302,10 @@ export default class Provider extends Component {
         salaryError = salaryValid ? '' : 'Salary error. Only numbers';
         break;
       case 'age':
-        ageValid = value.match(/^([1-9][0-9])?$/) ? true : false;
-        ageError = ageValid ? '' : 'Age error. Only 2 numbers';
+        // ageValid = value.match(/^([1-9][0-9])?$/) ? true : false;
+        value = Number(value);
+        ageValid = typeof value === 'number' && value >= 18 && value <= 70;
+        ageError = ageValid ? '' : 'Age error. Number from 18 to 70';
         break;
       default:
         break;
@@ -414,9 +428,9 @@ export default class Provider extends Component {
       competence: position.split(' ')[0].toLowerCase(),
       experienceYears,
       experienceMonths,
-      salary,
+      salary: Number(salary),
       prevExperience,
-      age,
+      age: Number(age),
       skills: {
         ...skills,
         JS,
@@ -442,20 +456,7 @@ export default class Provider extends Component {
     e.preventDefault();
   };
 
-  // Reports
-  reportsSubmitHandler = e => {
-    e.preventDefault();
-  };
-  reportsChangeHandler = e => {
-    const target = e.target;
-    const name = target.name;
-    this.setState(prevState => {
-      return {
-        reports: { ...prevState.reports, [name]: !prevState.reports[name] }
-      };
-    });
-  };
-  // ===================
+  // =========================================
 
   componentDidMount() {
     if (!this.state.staff) {
